@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKAI 마케팅·PR 통합 캠페인 맵</title>
+  <style>    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap');
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: #f6f6f6;
+      color: #111;
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: #000;
+      padding: 28px 48px 22px;
+    }
+    .header .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.55);
+      font-size: 9px; font-weight: 700; letter-spacing: 0.14em;
+      padding: 2px 10px; border-radius: 2px; margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    .header h1 { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.03em; }
+    .header p { font-size: 12px; color: rgba(255,255,255,0.38); margin-top: 5px; }
+
+    /* ── EMBARGO ── */
+    .embargo {
+      background: #996600;
+      color: #fff;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
+      padding: 8px 48px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .dot { width:6px; height:6px; border-radius:50%; background: rgba(255,255,255,0.6); flex-shrink: 0; }
+
+    /* ── CANVAS ── */
+    .canvas {
+      padding: 40px 24px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #fff;
+    }
+
+    /* ── ARROW ── */
+    .arrow-down { display: flex; flex-direction: column; align-items: center; height: 36px; }
+    .arrow-down .stem { width: 1px; flex: 1; background: #ccc; }
+    .arrow-down .head {
+      width: 0; height: 0;
+      border-left: 5px solid transparent; border-right: 5px solid transparent;
+      border-top: 7px solid #bbb;
+    }
+
+    /* ── NODES ── */
+    .node { border-radius: 6px; padding: 12px 20px; text-align: center; }
+
+    .node-title {
+      background: #000;
+      color: #fff; font-size: 15px; font-weight: 900;
+      padding: 14px 40px; border-radius: 5px;
+      min-width: 260px; letter-spacing: -0.02em;
+    }
+    .phase-label-sm { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; opacity: 0.6; margin-bottom: 3px; text-transform: uppercase; }
+    .phase-main { font-size: 14px; font-weight: 700; }
+
+    /* ── PHASE 통일 박스 ── */
+    .node-phase {
+      background: #004DFF;
+      color: #fff;
+      border-radius: 6px;
+      padding: 14px 40px;
+      min-width: 220px;
+      text-align: center;
+      letter-spacing: -0.02em;
+    }
+
+    .tracks-area { display: flex; justify-content: center; align-items: flex-start; gap: 12px; width: 100%; }
+    .track-col { display: flex; flex-direction: column; align-items: center; gap: 0; min-width: 128px; }
+
+    .node-track {
+      font-size: 11px; font-weight: 700; padding: 9px 8px;
+      border-radius: 5px; width: 128px; text-align: center;
+    }
+    .track-s { background: #f0fdf4; color: #007744; border: 1.5px solid #007744; }
+    .track-c { background: #eff6ff; color: #004DFF; border: 1.5px solid #004DFF; }
+    .track-p { background: #fffbeb; color: #996600; border: 1.5px solid #996600; }
+    .track-b { background: #f5f5f5; color: #555; border: 1.5px solid #888; }
+
+    .items-list { display: flex; flex-direction: column; gap: 7px; align-items: center; margin-top: 8px; }
+
+    a.node-item {
+      display: block; text-decoration: none;
+      font-size: 11px; font-weight: 500; padding: 8px 10px;
+      border-radius: 4px; width: 128px; text-align: center; line-height: 1.5;
+      transition: transform 0.12s; cursor: pointer; border: 1px solid;
+    }
+    a.node-item:hover { transform: translateY(-1px); }
+    .item-s { background: #f0fdf4; color: #007744; border-color: #a7f3d0; }
+    .item-s:hover { border-color: #007744; }
+    .item-c { background: #eff6ff; color: #004DFF; border-color: #bfdbfe; }
+    .item-c:hover { border-color: #004DFF; }
+    .item-p { background: #fffbeb; color: #996600; border-color: #fde68a; }
+    .item-p:hover { border-color: #996600; }
+    .item-b { background: #f5f5f5; color: #555; border-color: #ddd; }
+    .item-b:hover { border-color: #888; }
+    .item-0 { background: #fff3f3; color: #cc2222; border-color: #fca5a5; }
+    .item-0:hover { border-color: #cc2222; }
+
+    a.node-item::after { content: none; }
+
+    .outputs-area { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; max-width: 900px; }
+    .node-output {
+      background: #fff; color: #333;
+      font-size: 11px; font-weight: 600; padding: 10px 12px;
+      border-radius: 5px; min-width: 96px; text-align: center;
+      border: 1.5px solid #ddd;
+    }
+    .out-icon { font-size: 0; display: none; }
+
+    .globals-area { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .node-global {
+      background: #f0fdf4; color: #007744;
+      font-size: 11px; font-weight: 500; padding: 9px 14px;
+      border-radius: 4px; min-width: 116px; text-align: center;
+      border: 1px solid #a7f3d0; line-height: 1.5;
+    }
+
+    .node-goal {
+      background: #000;
+      color: #fff; font-weight: 900;
+      padding: 18px 48px; border-radius: 5px;
+      min-width: 280px; text-align: center;
+      letter-spacing: -0.02em;
+    }
+    .goal-label { font-size: 9px; letter-spacing: 0.12em; opacity: 0.45; margin-bottom: 5px; text-transform: uppercase; }
+    .goal-main { font-size: 16px; color: #fff; }
+    .goal-sub { font-size: 11px; opacity: 0.55; margin-top: 3px; }
+
+    /* ── LEGEND ── */
+    .legend {
+      display: flex; gap: 18px; flex-wrap: wrap; justify-content: center;
+      padding: 12px 48px;
+      border-top: 1px solid #e5e5e5;
+      background: #fff;
+    }
+    .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #777; }
+    .leg-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── DETAIL SECTIONS ── */
+    .detail-outer { background: #fff; border-top: 2px solid #eee; }
+    .detail-wrap { max-width: 880px; margin: 0 auto; padding: 56px 40px 80px; }
+
+    .detail-title {
+      font-size: 20px; font-weight: 900; color: #000;
+      margin-bottom: 4px; padding-bottom: 12px;
+      border-bottom: 2px solid #000;
+      letter-spacing: -0.03em;
+    }
+    .detail-sub { font-size: 12px; color: #888; margin-bottom: 32px; margin-top: 8px; line-height: 1.6; }
+
+    .kv-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+    .kv { display: flex; border-radius: 3px; overflow: hidden; font-size: 12px; border: 1px solid #ddd; }
+    .kv-k { background: #f5f5f5; color: #555; padding: 5px 12px; font-weight: 700; }
+    .kv-v { background: #fff; color: #111; padding: 5px 14px; }
+
+    .alert-box { border-radius: 5px; padding: 15px 18px; margin-bottom: 22px; border: 1px solid; }
+    .alert-box.alert-warn { background: #fffbeb; border-color: #fde68a; color: #78350f; }
+    .alert-box .alert-title { font-size: 13px; font-weight: 700; margin-bottom: 7px; color: #996600; }
+    .alert-box p { font-size: 13px; line-height: 1.7; margin-bottom: 7px; color: #78350f; }
+
+    .track-section { margin-bottom: 48px; }
+    .track-heading {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px; font-weight: 700;
+      padding: 10px 16px; border-radius: 4px;
+      margin-bottom: 16px; letter-spacing: -0.01em;
+      border-left: 4px solid;
+    }
+    .ts-0 { background: #fff3f3; color: #cc2222; border-left-color: #cc2222; }
+    .ts-s { background: #f0fdf4; color: #007744; border-left-color: #007744; }
+    .ts-c { background: #eff6ff; color: #004DFF; border-left-color: #004DFF; }
+    .ts-p { background: #fffbeb; color: #996600; border-left-color: #996600; }
+    .ts-b { background: #f5f5f5; color: #555; border-left-color: #888; }
+    .track-pr { background: #faf5ff; color: #6d28d9; border: 1.5px solid #6d28d9; }
+    .item-pr { background: #faf5ff; color: #6d28d9; border-color: #ddd6fe; }
+    .item-pr:hover { border-color: #6d28d9; }
+    .ts-pr { background: #faf5ff; color: #6d28d9; border-left-color: #6d28d9; }
+    .num-pr { background: #faf5ff; color: #6d28d9; border: 1px solid #ddd6fe; }
+
+    .overview-table-wrap { margin-bottom: 22px; }
+
+    .item-card {
+      background: #fff; border-radius: 6px; padding: 22px 26px;
+      margin-bottom: 12px; border: 1px solid #e5e5e5;
+      scroll-margin-top: 20px; transition: box-shadow 0.15s;
+    }
+    .item-card:hover { box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+
+    .item-card-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      margin-bottom: 14px; gap: 12px; padding-bottom: 12px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .item-card-num {
+      font-size: 10px; font-weight: 800; letter-spacing: 0.08em;
+      padding: 3px 9px; border-radius: 3px; flex-shrink: 0; margin-top: 2px;
+    }
+    .num-0 { background: #fff3f3; color: #cc2222; border: 1px solid #fca5a5; }
+    .num-s { background: #f0fdf4; color: #007744; border: 1px solid #a7f3d0; }
+    .num-c { background: #eff6ff; color: #004DFF; border: 1px solid #bfdbfe; }
+    .num-p { background: #fffbeb; color: #996600; border: 1px solid #fde68a; }
+    .num-b { background: #f5f5f5; color: #555; border: 1px solid #ddd; }
+
+    .item-card-title { font-size: 16px; font-weight: 700; color: #000; flex: 1; line-height: 1.4; letter-spacing: -0.02em; }
+    .item-card-title small { font-size: 12px; font-weight: 400; color: #888; }
+    .item-card-meta {
+      font-size: 11px; color: #888; text-align: right; flex-shrink: 0;
+      line-height: 1.7; background: #f8f8f8; padding: 5px 10px; border-radius: 3px; border: 1px solid #eee;
+    }
+    .item-card h4 { font-size: 10px; font-weight: 700; color: #999; letter-spacing: 0.08em; margin: 16px 0 7px; text-transform: uppercase; }
+    .item-card p { font-size: 13px; color: #444; margin-bottom: 9px; line-height: 1.75; }
+    .item-card ul { padding-left: 18px; margin-bottom: 9px; }
+    .item-card ul li { font-size: 13px; color: #444; margin-bottom: 5px; line-height: 1.7; }
+    .item-card strong { color: #000; }
+
+    .goal-block { background: #eff6ff; border-left: 3px solid #004DFF; padding: 10px 14px; border-radius: 0 4px 4px 0; font-size: 13px; color: #004DFF; margin-bottom: 13px; line-height: 1.7; }
+    .goal-block.warn { background: #fffbeb; border-left-color: #996600; color: #78350f; }
+
+    .code-block { background: #f8f8f8; border: 1px solid #e5e5e5; border-radius: 4px; padding: 12px 16px; font-family: 'SF Mono', 'Menlo', monospace; font-size: 12px; color: #007744; white-space: pre-wrap; line-height: 1.8; margin: 10px 0; }
+
+    .quote { border-left: 3px solid #004DFF; padding: 10px 16px; font-size: 13px; color: #004DFF; background: #eff6ff; border-radius: 0 4px 4px 0; margin: 12px 0; line-height: 1.75; }
+
+    .tbl { width: 100%; border-collapse: collapse; margin: 10px 0 14px; font-size: 12.5px; }
+    .tbl th { background: #f5f5f5; color: #555; font-weight: 700; padding: 8px 12px; text-align: left; border-bottom: 2px solid #000; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; }
+    .tbl td { padding: 8px 12px; color: #333; border-bottom: 1px solid #f0f0f0; line-height: 1.6; }
+    .tbl tr:last-child td { border-bottom: none; }
+    .tbl tr:hover td { background: #fafafa; }
+    .tbl td strong { color: #000; }
+    .tbl-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 10px 0 14px; }
+    .tbl-wrap .tbl { margin: 0; }
+
+    .chip-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+    .chip { font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 20px; line-height: 1.5; border: 1px solid; }
+    .chip-red    { background: #fff3f3; color: #cc2222; border-color: #fca5a5; }
+    .chip-orange { background: #fffbeb; color: #996600; border-color: #fde68a; }
+    .chip-yellow { background: #fefce8; color: #854d0e; border-color: #fef08a; }
+    .chip-blue   { background: #eff6ff; color: #004DFF; border-color: #bfdbfe; }
+    .chip-green  { background: #f0fdf4; color: #007744; border-color: #a7f3d0; }
+
+    .section-divider { height: 1px; background: #e5e5e5; margin: 48px 0; }
+    .cal-wrap { margin-top: 32px; }
+    .cal-title { font-size: 15px; font-weight: 700; color: #000; margin-bottom: 12px; letter-spacing: -0.02em; }
+
+    .back-top { display: inline-block; margin-top: 14px; font-size: 11px; color: #aaa; text-decoration: none; border-bottom: 1px solid #e5e5e5; padding-bottom: 1px; }
+    .back-top:hover { color: #004DFF; border-bottom-color: #004DFF; }
+
+    .footer { background: #000; padding: 14px 48px; font-size: 11px; color: rgba(255,255,255,0.35); display: flex; justify-content: space-between; }
+
+    /* ── 캔버스 2-컬럼 섹션 (메인 플로우 + PR 사이드) ── */
+    .canvas-ph-section {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      width: 1200px;
+      max-width: 100%;
+    }
+    .canvas-ph-main {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .canvas-pr-col {
+      width: 148px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      border-left: 2px dashed #ddd6fe;
+      padding: 6px 0 6px 12px;
+      margin-left: 12px;
+    }
+    .pr-col-header {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: #6d28d9;
+      background: #faf5ff; border: 1.5px solid #6d28d9;
+      border-radius: 4px; padding: 10px 10px; text-align: center;
+      width: 128px; margin-bottom: 2px;
+    }
+    .pr-col-phase-gap {
+      /* 이전 Phase 여백 보정용 빈 공간 */
+      flex: 1;
+    }
+
+
+
+    /* ── 벤치마킹 왼쪽 사이드 컬럼 ── */
+    .canvas-bench-col {
+      width: 160px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      border-right: 2px dashed #ccc;
+      padding: 6px 12px 6px 0;
+      margin-right: 12px;
+    }
+    .canvas-bench-col .bench-items a.node-item { width: 148px; }
+    /* ── Phase 2/3 왼쪽 빈 컬럼 (bench-col 대칭용) ── */
+    .canvas-empty-col {
+      width: 160px;
+      flex-shrink: 0;
+      padding: 6px 12px 6px 0;
+      margin-right: 12px;
+    }
+    /* ── 파트너십 트랙 가로 서브-컬럼 ── */
+    .track-col-wide { display: flex; flex-direction: column; align-items: center; }
+    .ps-grid { display: flex; gap: 12px; align-items: flex-start; }
+    .ps-col { display: flex; flex-direction: column; align-items: center; }
+    .ps-col .arrow-down { height: 24px; }
+    /* ── PHASE1+벤치마킹 레이아웃 ── */
+    .phase1-row {
+      display: flex; justify-content: center; align-items: flex-start;
+      gap: 20px; width: 100%;
+    }
+    .phase1-main { display: flex; flex-direction: column; align-items: center; }
+    .phase1-bench {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 10px 14px; background: #fafafa;
+      border: 1.5px dashed #ccc; border-radius: 6px;
+    }
+    .bench-label {
+      font-size: 8px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #bbb; margin-bottom: 8px;
+    }
+    .bench-items { display: flex; flex-direction: column; gap: 5px; margin-top: 8px; align-items: center; }
+    .bench-items a.node-item { width: 148px !important; font-size: 10.5px; }
+
+    /* ── 공시 노드 ── */
+    .node-kojisi {
+      background: #fffbeb; color: #78350f;
+      border: 1.5px solid #996600;
+      font-size: 11px; font-weight: 600; padding: 9px 18px;
+      border-radius: 5px; text-align: center; line-height: 1.5;
+    }
+    .kojisi-row {
+      display: flex; justify-content: center; align-items: center;
+      gap: 12px; margin: 8px 0;
+    }
+    .kojisi-arrow { font-size: 13px; color: #bbb; }
+
+    /* ── Phase 3 순차 체인 ── */
+    .p3-chain { display: flex; flex-direction: column; align-items: center; }
+    .p3-branch { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── RESPONSIVE ── */
+    .phase1-row {
+      display: flex; justify-content: center; align-items: flex-start;
+      gap: 20px; width: 100%;
+    }
+    .phase1-main { display: flex; flex-direction: column; align-items: center; }
+    .phase1-bench {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 10px 14px; background: #fafafa;
+      border: 1.5px dashed #ccc; border-radius: 6px;
+    }
+    .bench-label {
+      font-size: 8px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #bbb; margin-bottom: 8px;
+    }
+    .bench-items { display: flex; flex-direction: column; gap: 5px; margin-top: 8px; align-items: center; }
+    .bench-items a.node-item { width: 148px !important; font-size: 10.5px; }
+
+    /* ── PR 트랙 페이즈 레이블 ── */
+    .pr-phase-label {
+      font-size: 7px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #7c3aed;
+      background: #f3e8ff; padding: 2px 8px; border-radius: 2px;
+      width: 128px; text-align: center; margin-top: 6px;
+    }
+    .pr-phase-label:first-child { margin-top: 0; }
+
+    /* ── 공시 노드 ── */
+    .node-kojisi {
+      background: #fffbeb; color: #78350f;
+      border: 1.5px solid #996600;
+      font-size: 11px; font-weight: 600; padding: 9px 18px;
+      border-radius: 5px; text-align: center; line-height: 1.5;
+    }
+    .kojisi-row {
+      display: flex; justify-content: center; align-items: center;
+      gap: 12px; margin: 8px 0;
+    }
+    .kojisi-arrow { font-size: 13px; color: #bbb; }
+
+    /* ── Phase 3 순차 체인 ── */
+    .p3-chain { display: flex; flex-direction: column; align-items: center; }
+    .p3-branch { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .phase1-row { flex-direction: column; align-items: center; gap: 16px; }
+      .phase1-bench { width: 88%; max-width: 320px; }
+      .bench-items a.node-item { width: 100% !important; }
+      .canvas-ph-section { flex-direction: column; align-items: center; }
+      .canvas-pr-col {
+        border-left: none; border-top: 2px dashed #ddd6fe;
+        padding: 12px 0 0 0; margin-left: 0; margin-top: 8px;
+        width: 88%; max-width: 400px;
+        flex-direction: row; flex-wrap: wrap; justify-content: center;
+      }
+      .pr-col-header { width: auto; margin-right: 8px; }
+      .p3-branch { flex-direction: column; align-items: center; }
+      .ps-grid { flex-direction: column; align-items: center; gap: 16px; }
+      .canvas-bench-col { border-right: none; border-bottom: 2px dashed #ccc; padding: 0 0 12px 0; margin-right: 0; margin-bottom: 8px; width: 88%; max-width: 400px; flex-direction: row; flex-wrap: wrap; justify-content: center; }
+      .header { padding: 20px 20px 16px; }
+      .header h1 { font-size: 17px; }
+      .embargo { padding: 7px 20px; font-size: 10px; }
+      .canvas { padding: 24px 12px 20px; }
+      .node-title { min-width: unset; width: 88%; font-size: 13px; padding: 12px 16px; }
+      .node-p0, .node-p1, .node-p3 { min-width: unset; width: 88%; }
+      .node-p2 { width: 180px; height: 68px; }
+      .tracks-area { flex-direction: column; align-items: center; gap: 20px; }
+      .track-col { width: 88%; max-width: 300px; }
+      .node-track { width: 100%; }
+      .items-list { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 8px; }
+      a.node-item { width: calc(50% - 4px) !important; }
+      .outputs-area { gap: 8px; }
+      .node-output { min-width: calc(33% - 6px); padding: 8px; }
+      .node-global { width: 88%; max-width: 280px; }
+      .node-goal { min-width: unset; width: 88%; padding: 14px 20px; }
+      .legend { padding: 12px 20px; gap: 10px; }
+      .detail-wrap { padding: 32px 16px 56px; }
+      .item-card { padding: 16px 14px; }
+      .item-card-header { flex-direction: column; gap: 6px; }
+      .item-card-meta { text-align: left; }
+      .footer { padding: 12px 20px; flex-direction: column; gap: 3px; }
+    }
+    @media (max-width: 480px) {
+      .header h1 { font-size: 15px; }
+      a.node-item { width: 100% !important; }
+      .node-output { min-width: calc(50% - 5px); font-size: 10px; padding: 8px 6px; }
+      .detail-title { font-size: 17px; }
+      .tbl th, .tbl td { padding: 7px 8px; font-size: 11.5px; }
+    }
+  
+/* ─── PROGRESS TRACKER ─── */
+.progress-tracker {
+  background: #fff;
+  border-bottom: 2px solid #e2e8f0;
+  padding: 14px 32px 12px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+.pt-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 9px;
+}
+.pt-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.pt-counts { display: flex; gap: 6px; }
+.pt-count {
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 2px 9px;
+  border-radius: 99px;
+}
+.pt-done-badge { background: #dcfce7; color: #007744; }
+.pt-ing-badge  { background: #fef3c7; color: #996600; }
+.pt-plan-badge { background: #f1f5f9; color: #64748b; }
+.pt-total { font-size: 10.5px; color: #94a3b8; margin-left: auto; white-space: nowrap; }
+.pt-bar { display: flex; flex-wrap: wrap; gap: 4px; }
+.pt-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 9.5px;
+  font-weight: 500;
+  cursor: default;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  transition: opacity .15s;
+}
+.pt-item:hover { opacity: .7; }
+.pt-item--done { background: #f0fdf4; border-color: #86efac; color: #007744; }
+.pt-item--ing  { background: #fffbeb; border-color: #fcd34d; color: #996600; }
+.pt-item--plan { background: #f8fafc; border-color: #e2e8f0; color: #64748b; }
+.pt-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+.pt-item--done .pt-dot { background: #007744; }
+.pt-item--ing  .pt-dot { background: #996600; }
+.pt-item--plan .pt-dot { background: #94a3b8; }
+
+</style>
+</head>
+<body>
+
+<!-- ── PASSWORD GATE ── -->
+<div id="pw-gate" style="
+  position:fixed; inset:0; z-index:9999;
+  background:#0b1120;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:20px; font-family:'Noto Sans KR',sans-serif;
+">
+  <div style="font-size:13px;font-weight:700;letter-spacing:0.12em;color:#6d28d9;text-transform:uppercase;">SKAI Intelligence</div>
+  <div style="font-size:22px;font-weight:700;color:#fff;letter-spacing:-0.02em;">캠페인맵 통합보고서</div>
+  <div style="font-size:12px;color:#888;margin-top:-8px;">접근 코드를 입력하세요</div>
+  <div style="display:flex;gap:8px;margin-top:8px;">
+    <input id="pw-input" type="password" maxlength="20" placeholder="••••"
+      style="
+        width:160px; padding:10px 14px; font-size:15px; letter-spacing:0.15em;
+        border:1.5px solid #333; border-radius:6px;
+        background:#1a1f2e; color:#fff; outline:none; text-align:center;
+      "
+      onkeydown="if(event.key==='Enter') checkPW()"
+    />
+    <button onclick="checkPW()" style="
+      padding:10px 20px; background:#6d28d9; color:#fff;
+      border:none; border-radius:6px; font-size:13px; font-weight:700;
+      cursor:pointer; letter-spacing:0.05em;
+    ">입장</button>
+  </div>
+  <div id="pw-error" style="font-size:12px;color:#ef4444;min-height:16px;"></div>
+</div>
+
+<script>
+  (function(){
+    if(sessionStorage.getItem('skai_auth')==='ok'){
+      document.getElementById('pw-gate').style.display='none';
+    }
+    setTimeout(function(){
+      var el=document.getElementById('pw-input');
+      if(el) el.focus();
+    },100);
+  })();
+  function checkPW(){
+    var val=document.getElementById('pw-input').value;
+    if(val==='0622'){
+      sessionStorage.setItem('skai_auth','ok');
+      document.getElementById('pw-gate').style.display='none';
+    } else {
+      document.getElementById('pw-error').textContent='코드가 맞지 않습니다.';
+      document.getElementById('pw-input').value='';
+      document.getElementById('pw-input').focus();
+    }
+  }
+</script>
+
+<!-- ═══ PROGRESS TRACKER ═══ -->
+<div class="progress-tracker">
+  <div class="pt-header">
+    <span class="pt-title">마케팅 인텔리전스 · 업무 진척도</span>
+    <div class="pt-counts">
+      <span class="pt-count pt-done-badge">완료 2</span>
+      <span class="pt-count pt-ing-badge">진행중 2</span>
+      <span class="pt-count pt-plan-badge">예정 27</span>
+    </div>
+    <span class="pt-total">총 31개 항목 · 기준일 2026-05-20 (업데이트)</span>
+  </div>
+  <div class="pt-bar">
+    <div class="pt-item pt-item--done" title="A PR 전략적 파트너쉽 킥오프 · 5/18~5/20 · 완료"><span class="pt-dot"></span>A PR 킥오프</div>
+    <div class="pt-item pt-item--done" title="인프라 응급 조치 · 5/19~5/22 · 완료"><span class="pt-dot"></span>인프라 응급 조치</div>
+    <div class="pt-item pt-item--plan" title="합성데이터 SEO 블로그 신설 · 5/20~5/22 · 예정"><span class="pt-dot"></span>SEO 블로그 신설</div>
+    <div class="pt-item pt-item--ing"  title="벤치마킹 · 5/20~5/22 · 진행중"><span class="pt-dot"></span>벤치마킹</div>
+    <div class="pt-item pt-item--plan" title="기존 마케팅사 미팅 : 에이토즈 · 5/22 · 예정"><span class="pt-dot"></span>에이토즈 미팅</div>
+    <div class="pt-item pt-item--plan" title="이재철 대표 기본 원고 수급 · 5/22 · 대기"><span class="pt-dot"></span>대표 원고 수급</div>
+    <div class="pt-item pt-item--plan" title="전문가 섭외 (대표님) 확인 · 5/21~5/25 · 대기"><span class="pt-dot"></span>전문가 섭외 확인</div>
+    <div class="pt-item pt-item--plan" title="네이버 키워드 광고 · 5/22~5/25 · 예정"><span class="pt-dot"></span>네이버 키워드 광고</div>
+    <div class="pt-item pt-item--plan" title="AEO/SEO 가이드 외주사 소스 업데이트 · 5/22~5/25 · 예정"><span class="pt-dot"></span>AEO/SEO 소스</div>
+    <div class="pt-item pt-item--plan" title="AI TODAY 인터뷰 기사 · 5/25~5/26 · 예정"><span class="pt-dot"></span>AI TODAY 인터뷰</div>
+    <div class="pt-item pt-item--plan" title="한경 인터뷰 정리 · 5/25~5/26 · 예정"><span class="pt-dot"></span>한경 인터뷰</div>
+    <div class="pt-item pt-item--plan" title="전자신문 보도 협의 · 5/25~5/26 · 예정"><span class="pt-dot"></span>전자신문 보도</div>
+    <div class="pt-item pt-item--plan" title="인텔리전스 홈페이지 리뉴얼 : 영상 제작(외주) · 5/25~5/29 · 예정"><span class="pt-dot"></span>HP 영상(외주)</div>
+    <div class="pt-item pt-item--ing"  title="인텔리전스 홈페이지 리뉴얼 : 기획/디자인 · 5/20~5/29 · 진행중"><span class="pt-dot"></span>HP 기획/디자인</div>
+    <div class="pt-item pt-item--plan" title="경제·IT 언론사 컨택 - 합성데이터 기획기사 · 5/25~5/29 · 대기"><span class="pt-dot"></span>IT 언론사 컨택</div>
+    <div class="pt-item pt-item--plan" title="파워블로거 섭외 : 에이토즈 · 5/25~5/29 · 예정"><span class="pt-dot"></span>파워블로거 섭외</div>
+    <div class="pt-item pt-item--plan" title="유투브 채널 섭외 · 5/25~5/29 · 대기"><span class="pt-dot"></span>유튜브 채널 섭외</div>
+    <div class="pt-item pt-item--plan" title="바이럴 파트너 확보 · 5/25~5/29 · 대기"><span class="pt-dot"></span>바이럴 파트너</div>
+    <div class="pt-item pt-item--plan" title="네이버 블로그 생성 · 5/25~5/29 · 예정"><span class="pt-dot"></span>네이버 블로그</div>
+    <div class="pt-item pt-item--plan" title="커뮤니티 사이트 생성 · 5/25~5/29 · 예정"><span class="pt-dot"></span>커뮤니티 사이트</div>
+    <div class="pt-item pt-item--plan" title="구글 애드 (Pillar 페이지 연동, 글로벌용) · 5/26 · 예정"><span class="pt-dot"></span>구글 애드</div>
+    <div class="pt-item pt-item--plan" title="전략적 협의 발표 · 5/29~6/1 · 예정"><span class="pt-dot"></span>전략적 협의 발표</div>
+    <div class="pt-item pt-item--plan" title="블로그/링크드인/인스타 게시 · 6/1~6/19 · 예정"><span class="pt-dot"></span>SNS 게시</div>
+    <div class="pt-item pt-item--plan" title="인텔리전스 홈페이지 리뉴얼 : 개발 · 6/1~6/5 · 예정"><span class="pt-dot"></span>HP 개발</div>
+    <div class="pt-item pt-item--plan" title="언론사 보도자료 배포 · 6/1~6/19 · 예정"><span class="pt-dot"></span>보도자료 배포</div>
+    <div class="pt-item pt-item--plan" title="애널리스트 리포트 (IR) · 6/1~6/5 · 예정"><span class="pt-dot"></span>IR 리포트</div>
+    <div class="pt-item pt-item--plan" title="유투브 게시 · 6/1~6/14 · 예정"><span class="pt-dot"></span>유튜브 게시</div>
+    <div class="pt-item pt-item--plan" title="영문 Synthetic Data 페이지 배포 · 6/8~6/12 · 대기"><span class="pt-dot"></span>영문 Synth 페이지</div>
+    <div class="pt-item pt-item--plan" title="해외 언론 피칭 · 6/15~6/19 · 대기"><span class="pt-dot"></span>해외 언론 피칭</div>
+    <div class="pt-item pt-item--plan" title="중국 공급망 박람회 · 6/22 · 예정"><span class="pt-dot"></span>공급망 박람회</div>
+    <div class="pt-item pt-item--plan" title="WAIC 2026 · 7/1 · 예정"><span class="pt-dot"></span>WAIC 2026</div>
+  </div>
+</div>
+
+
+<!-- ═══ HEADER ═══ -->
+<div class="header" id="top">
+  <div class="badge">CONFIDENTIAL · EMBARGOED</div>
+  <h1>SKAI 마케팅·PR 통합 캠페인 맵</h1>
+  <p>마케팅솔루션본부 | 정원영 본부장 | 2026.05.19 기준</p>
+</div>
+
+<div class="embargo">
+  <span class="dot"></span>
+  MOU 엠바고 관리 중 — 공식 발표 전 파트너사명 외부 공개 금지
+</div>
+
+<!-- ═══ DIAGRAM ═══ -->
+<div class="canvas">
+
+  <!-- ① TITLE -->
+  <div class="node node-title">SKAI 마케팅·PR 통합 캠페인 맵</div>
+
+  <div class="arrow-down"><div class="stem"></div><div class="head"></div></div>
+
+  <!-- ① PHASE 0 -->
+  <div class="node node-phase">
+    <div class="phase-label-sm">PHASE 0 · 선행 필수 · 이번 주 완료</div>
+    <div class="phase-main">인프라 응급 조치</div>
+    <div style="font-size:10px;opacity:0.75;margin-top:4px;">skaiworldwide.com / skaiintelligence.co.kr</div>
+  </div>
+
+  <!-- Phase 0 items row -->
+  <div style="display:flex;justify-content:center;gap:10px;margin:14px 0 4px;flex-wrap:wrap;">
+    <a class="node-item item-0" href="#p0-1">SPA 폴백<br>정책 수정</a>
+    <a class="node-item item-0" href="#p0-2">sitemap.xml<br>배포</a>
+    <a class="node-item item-0" href="#p0-3">robots.txt<br>즉시 교체</a>
+    <a class="node-item item-0" href="#p0-4">Canonical<br>도메인 정책</a>
+  </div>
+
+  <div class="arrow-down"><div class="stem"></div><div class="head"></div></div>
+
+  <!-- ─── PHASE 1 구역 ─── -->
+  <div class="canvas-ph-section">
+    <!-- 벤치마킹 트랙 — Phase 1 병행 수행 -->
+    <div class="canvas-bench-col">
+      <div class="bench-label">전략 분석 · 병행</div>
+      <div class="node node-track track-b" style="width:148px;font-size:10.5px;">벤치마킹 트랙</div>
+      <div class="bench-items">
+        <a class="node-item item-b" href="#s4-1">Scale AI MOU 사례</a>
+        <a class="node-item item-b" href="#s4-2">기술전문매체 기사화</a>
+        <a class="node-item item-b" href="#s4-3">주가상승 동반 마케팅</a>
+        <a class="node-item item-b" href="#s4-4">헤드라인 공식 추출</a>
+      </div>
+    </div>
+    <div class="canvas-ph-main">
+      <div class="node node-phase" style="margin-bottom:8px;">
+        <div class="phase-label-sm">PHASE 1 · 즉시 실행</div>
+        <div class="phase-main">국내 인지도 선점</div>
+      </div>
+      <div class="arrow-down"><div class="stem"></div><div class="head"></div></div>
+      <div class="tracks-area">
+
+        <!-- Track 1: 검색 -->
+        <div class="track-col">
+          <div class="node node-track track-s">검색 노출 트랙</div>
+          <div style="height:14px"></div>
+          <div class="items-list">
+            <a class="node-item item-s" href="#s1-2">SEO 블로그<br>신설</a>
+            <a class="node-item item-s" href="#s1-3">AEO/SEO<br>동시 대응</a>
+            <a class="node-item item-s" href="#s1-1">네이버<br>키워드 광고</a>
+            <a class="node-item item-s" href="#s1-4">구글 애드</a>
+          </div>
+        </div>
+
+        <!-- Track 2: 콘텐츠 -->
+        <div class="track-col">
+          <div class="node node-track track-c">콘텐츠 원고 트랙</div>
+          <div style="height:14px"></div>
+          <div class="items-list">
+            <a class="node-item item-c" href="#s2-1">합성데이터<br>개념 설명형</a>
+            <a class="node-item item-c" href="#s2-2">시장 전망형</a>
+          </div>
+        </div>
+
+        <!-- Track 3: 파트너십 (피그잼 원본 — 4개 서브-컬럼 가로) -->
+        <div class="track-col-wide">
+          <div class="node node-track track-p" style="width:560px;max-width:100%;min-width:unset;">파트너십 트랙</div>
+          <div style="height:14px"></div>
+          <div class="ps-grid">
+
+            <!-- 서브-col 1: 전문가 섭외 → 유튜브 채널 접촉 -->
+            <div class="ps-col">
+              <a class="node-item item-p" href="#s3-1">전문가 섭외<br><span style="font-size:9px;opacity:0.8;">김대식·데이스 홍<br>미키피디아·정동선<br>김덕진·강정수</span></a>
+              <div class="arrow-down"><div class="stem"></div><div class="head"></div></div>
+              <a class="node-item item-p" href="#s3-2">유튜브 채널<br><span style="font-size:9px;opacity:0.8;">슈카·삼프로TV<br>지식인사이드·SOD</span></a>
+            </div>
+
+            <!-- 서브-col 2: 파워블로거 섭외 -->
+            <div class="ps-col">
+              <a class="node-item item-p" href="#s3-3">파워블로거 섭외<br><span style="font-size:9px;opacity:0.8;">에이토즈</span></a>
+            </div>
+
+            <!-- 서브-col 3: 커뮤니티 생성 → 바이럴 파트너 → MOU 바이럴 전략 -->
+            <div class="ps-col">
+              <a class="node-item item-p" href="#s3-4">커뮤니티 사이트<br>생성 · 네이버 블로그</a>
+              <div class="arrow-down"><div class="stem"></div><div class="head"></div></div>
+              <a class="node-item item-p" href="#s3-5">바이럴 파트너<br>확보</a>
+              <div class="arrow-down"><div class="stem"></div><div class="head"></div></div>
+              <a class="node-item item-p" href="#s3-6">MOU 발표<br>전후 바이럴</a>
+            </div>
+
+            <!-- 서브-col 4: 경제·IT 언론사 컨택 -->
+            <div class="ps-col">
+              <a class="node-item item-p" href="#s3-7">경제·IT 언론사<br>컨택</a>
+            </div>
+
+          </div>
+        </div>
+
+      </div><!-- /tracks-area -->
+    </div><!-- /canvas-ph-main -->
+
+    <!-- PR 트랙 — Phase 1 구역 -->
+    <div class="canvas-pr-col" style="padding-top:114px;">
+      <div class="pr-col-header">PR 트랙</div>
+      <a class="node-item item-pr" href="#s5-1">합성데이터<br>기획기사</a>
+    </div>
+
+  </div><!-- /canvas-ph-section Phase 1 -->
+
+  <div class="arrow-down"><div class="stem"></div><div class="head"></div></div>
+
+  <!-- ─── PHASE 2 구역 ─── -->
+  <div class="canvas-ph-section">
+    <div class="canvas-empty-col"></div>
+    <div class="canvas-ph-main">
+      <div class="node node-phase" style="margin-bottom:8px;">
+        <div class="phase-label-sm">PHASE 2 · 발표 직후</div>
+        <div class="phase-main">A사와 전략적 협약 체결 공식 발표</div>
+        <div style="font-size:10px;opacity:0.75;margin-top:4px;">5월말 ~ 6월초 (예정)</div>
+      </div>
+      <div class="arrow-down"><div class="stem"></div><div class="head"></div></div>
+      <div class="outputs-area">
+        <div class="node node-output">유튜브<br>게시</div>
+        <div class="node node-output">블로그·링크드인<br>인스타</div>
+        <div class="node node-output">애널리스트<br>리포트 (IR사)</div>
+        <div class="node node-output">언론사<br>보도자료 배포</div>
+      </div>
+    </div><!-- /canvas-ph-main -->
+
+    <!-- PR 트랙 — Phase 2 구역 -->
+    <div class="canvas-pr-col">
+      <a class="node-item item-pr" href="#s5-3">SKAI X A사<br>보도자료</a>
+      <a class="node-item item-pr" href="#s5-4">CEO 인터뷰<br>2회</a>
+    </div>
+
+  </div><!-- /canvas-ph-section Phase 2 -->
+
+  <div class="arrow-down"><div class="stem"></div><div class="head"></div></div>
+
+  <!-- ─── PHASE 3 구역 ─── -->
+  <div class="canvas-ph-section">
+    <!-- 공시 — Phase 3 글로벌 확장 트리거 -->
+    <div class="canvas-empty-col" style="display:flex;flex-direction:column;align-items:center;gap:8px;padding-top:16px;">
+      <div class="node-kojisi">공시<br><span style="font-size:9px;opacity:0.7;">전후 상황 살펴 대응</span></div>
+      <div style="font-size:9px;color:#aaa;font-style:italic;text-align:center;">↑ MOU 공시 후<br>글로벌 확장 연결</div>
+    </div>
+    <div class="canvas-ph-main">
+      <div class="node node-phase" style="margin-bottom:8px;">
+        <div class="phase-label-sm">PHASE 3 · WAIC 대응</div>
+        <div class="phase-main">글로벌 확장</div>
+      </div>
+      <div class="arrow-down"><div class="stem"></div><div class="head"></div></div>
+      <div class="p3-chain">
+        <div class="node node-global"><span style="color:#FFD700;">★</span> 중국 공급망<br>박람회 (6/22)</div>
+        <div class="arrow-down"><div class="stem"></div><div class="head"></div></div>
+        <div class="node node-global"><span style="color:#FFD700;">★</span> WAIC 2026<br>글로벌 발표</div>
+        <div class="arrow-down"><div class="stem"></div><div class="head"></div></div>
+        <div class="p3-branch">
+          <div class="node node-global">영문 Synthetic<br>Data 페이지</div>
+          <div class="node node-global">해외 언론<br>피칭 (7월중)</div>
+        </div>
+      </div>
+    </div><!-- /canvas-ph-main -->
+
+    <!-- PR 트랙 — Phase 3 구역 -->
+    <div class="canvas-pr-col">
+      <a class="node-item item-pr" href="#s5-2">공급망 박람회<br>르포기사</a>
+      <a class="node-item item-pr" href="#s5-5">CEO 기술력<br>취재</a>
+      <a class="node-item item-pr" href="#s5-5">딜로이트 백서<br>(7월중)</a>
+      <a class="node-item item-pr" href="#s5-5">기자간담회</a>
+      <a class="node-item item-pr" href="#s5-5">팸투어 (7월)</a>
+    </div>
+
+  </div><!-- /canvas-ph-section Phase 3 -->
+
+  <div class="arrow-down"><div class="stem"></div><div class="head"></div></div>
+
+  <!-- ⑧ FINAL GOAL -->
+  <div class="node node-goal">
+    <div class="goal-label">FINAL OBJECTIVE</div>
+    <div class="goal-main">SKAI = 피지컬AI 시대 데이터 인프라 대표주자</div>
+    <div class="goal-sub">합성데이터 국내 1위 브랜드 확립</div>
+  </div>
+
+</div><!-- /canvas -->
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="legend-item"><span class="leg-dot" style="background:#007744"></span>검색 노출 트랙</div>
+  <div class="legend-item"><span class="leg-dot" style="background:#004DFF"></span>콘텐츠 원고 트랙</div>
+  <div class="legend-item"><span class="leg-dot" style="background:#996600"></span>파트너십 트랙</div>
+  <div class="legend-item"><span class="leg-dot" style="background:#888888"></span>벤치마킹 트랙 (Phase 1 병행)</div>
+  <div class="legend-item"><span class="leg-dot" style="background:#6d28d9"></span>PR 트랙 (전 Phase 순차 타임라인)</div>
+  <div class="legend-item"><span class="leg-dot" style="background:#dc2626"></span>Phase 2 MOU 발표</div>
+  <div class="legend-item"><span class="leg-dot" style="background:#14b8a6"></span>Phase 3 글로벌</div>
+  <div class="legend-item"><span class="leg-dot" style="background:#6366f1"></span>최종 목표</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     상세 전략
+═══════════════════════════════════════════════════════════════ -->
+<div class="detail-outer">
+<div class="detail-wrap">
+
+  <!-- ═══ PHASE 0 ═══ -->
+  <div class="detail-title" style="border-bottom-color:#f97316">Phase 0 — 긴급 인프라 응급 조치</div>
+  <div class="detail-sub">작성: AX랩팀 박재성 팀장 | 대상: skaiworldwide.com · skaiintelligence.co.kr | 예상 공수: 3~4 영업일</div>
+
+  <div class="alert-box alert-warn">
+    <div class="alert-title">Phase 0의 의의 — 응급조치</div>
+    <p>두 사이트 모두 <strong>JavaScript SPA(Single Page Application)</strong> 구조로, 네이버봇·GPTBot·ClaudeBot 등 AI 크롤러가 본문을 읽지 못하는 상태입니다. 근본 해결(SSR/SSG 전환, Phase 2)은 2~6주가 필요하지만, Phase 0의 4가지 작업은 합쳐서 2~3일이면 즉시 효과가 납니다.</p>
+    <div class="chip-row">
+      <span class="chip chip-red">네이버봇 — JS 미실행, 본문 색인 불가</span>
+      <span class="chip chip-red">GPTBot·ClaudeBot·PerplexityBot — AI 검색 인용 누락</span>
+      <span class="chip chip-orange">구글봇 — 렌더링 지연, sitemap 없어 색인 효율 저하</span>
+    </div>
+  </div>
+
+  <div style="margin-bottom:28px;">
+    <div class="tbl-wrap"><table class="tbl">
+      <tr><th>번호</th><th>작업명</th><th>담당</th><th>공수</th><th>순서</th></tr>
+      <tr><td><strong>0-1</strong></td><td>SPA 폴백 정책 긴급 수정</td><td>AX랩</td><td>0.5일</td><td>🔴 1번째 (선행 필수)</td></tr>
+      <tr><td><strong>0-2</strong></td><td>임시 sitemap.xml 배포</td><td>AX랩</td><td>0.5~1일</td><td>🔴 2번째 (0-1 완료 후)</td></tr>
+      <tr><td><strong>0-3</strong></td><td>robots.txt 즉시 교체</td><td>AX랩</td><td>0.5일</td><td>🔴 3번째 (0-2 완료 후)</td></tr>
+      <tr><td><strong>0-4</strong></td><td>Canonical 도메인 정책 결정 및 적용</td><td>AX랩</td><td>결정 1일 + 적용 0.5일</td><td>🟡 병행 가능 (의사결정 필요)</td></tr>
+    </table></div>
+  </div>
+
+  <div class="track-section">
+    <div class="track-heading ts-0">Phase 0 — 4가지 긴급 작업</div>
+
+    <!-- 0-1 -->
+    <div class="item-card" id="p0-1">
+      <div class="item-card-header">
+        <div class="item-card-num num-0">0-1</div>
+        <div class="item-card-title">SPA 폴백 정책 긴급 수정</div>
+        <div class="item-card-meta">담당: AX랩<br>공수: 0.5일 · 난이도: 낮음</div>
+      </div>
+      <div class="goal-block warn">문제: 서버가 /sitemap.xml 포함 모든 경로에 동일한 빈 HTML을 반환 → 검색엔진이 "사이트맵 깨짐"으로 판단, soft 404 대량 발생</div>
+      <h4>목표</h4>
+      <ul>
+        <li>정적 파일(/sitemap.xml, /robots.txt 등)은 실제 파일 반환 또는 404 응답</li>
+        <li>존재하지 않는 페이지는 반드시 <strong>HTTP 404</strong> 상태 코드로 응답</li>
+      </ul>
+      <h4>환경별 적용 방법</h4>
+      <div class="tbl-wrap"><table class="tbl">
+        <tr><th>환경</th><th>방법</th></tr>
+        <tr><td>Next.js + Vercel</td><td>vercel.json rewrites에 정적 파일 경로 negative lookahead 추가</td></tr>
+        <tr><td>Next.js + Nginx</td><td>location 블록에서 /robots.txt, /sitemap.xml 먼저 try_files로 분리</td></tr>
+        <tr><td>AWS S3 + CloudFront</td><td>CloudFront Function으로 정적 파일 경로 폴백 제외 처리</td></tr>
+        <tr><td>Apache (.htaccess)</td><td>RewriteCond로 정적 파일 경로 우선 매칭 후 그 외만 index.html 폴백</td></tr>
+      </table></div>
+      <h4>완료 기준</h4>
+      <ul>
+        <li>/sitemap.xml → HTTP 200 + application/xml</li>
+        <li>/robots.txt → HTTP 200 + text/plain</li>
+        <li>/존재하지않는경로 → HTTP 404</li>
+        <li>/ (홈) → HTTP 200 정상 유지</li>
+      </ul>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+
+    <!-- 0-2 -->
+    <div class="item-card" id="p0-2">
+      <div class="item-card-header">
+        <div class="item-card-num num-0">0-2</div>
+        <div class="item-card-title">임시 sitemap.xml 배포</div>
+        <div class="item-card-meta">담당: AX랩<br>공수: 0.5~1일 · 0-1 완료 후 진행</div>
+      </div>
+      <div class="goal-block warn">문제: 두 사이트 모두 sitemap.xml 파일 자체가 없음 → 검색엔진이 페이지를 누락하거나 발견이 늦어짐</div>
+      <h4>작성 원칙</h4>
+      <ul>
+        <li>절대 URL 사용 (https://로 시작)</li>
+        <li>canonical URL과 반드시 일치 (다른 도메인 가리키면 무효)</li>
+        <li>lastmod는 실제 변경일만 기록 (매번 갱신 시 신뢰도 하락)</li>
+      </ul>
+      <h4>대상 사이트별 주요 URL</h4>
+      <div class="tbl-wrap"><table class="tbl">
+        <tr><th>사이트</th><th>포함해야 할 주요 섹션</th></tr>
+        <tr><td>skaiworldwide.com</td><td>홈 · 회사소개 · 제품 · 서비스 · 리소스·블로그 · 뉴스룸 · IR · 채용 · 영문 페이지</td></tr>
+        <tr><td>skaiintelligence.co.kr</td><td>홈 · 솔루션(SKAI All-in-One · B.THREE) · 기술(피지컬AI·디지털트윈) · 사례 연구 · 뉴스 · 채용</td></tr>
+      </table></div>
+      <h4>배포 방법 (권장)</h4>
+      <ul>
+        <li><strong>정적 파일:</strong> Next.js public/ 디렉토리에 sitemap.xml 배치 (가장 빠름)</li>
+        <li><strong>동적 자동생성:</strong> next-sitemap 패키지 설치 후 postbuild 스크립트 연동 (권장, 유지보수 편함)</li>
+      </ul>
+      <div class="chip-row">
+        <span class="chip chip-orange">배포 후 Google Search Console에 sitemap.xml URL 제출 (Phase 1)</span>
+      </div>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+
+    <!-- 0-3 -->
+    <div class="item-card" id="p0-3">
+      <div class="item-card-header">
+        <div class="item-card-num num-0">0-3</div>
+        <div class="item-card-title">robots.txt 즉시 교체</div>
+        <div class="item-card-meta">담당: AX랩<br>공수: 0.5일 · 0-2 완료 후 진행</div>
+      </div>
+      <div class="goal-block warn">문제: 현재 Create React App 기본 boilerplate 수준 — Sitemap 지시문 누락, AI 봇 명시적 허용 없음</div>
+      <h4>개선 내용 3가지</h4>
+      <ul>
+        <li>Sitemap 지시문 추가 → 검색엔진이 사이트맵 자동 발견</li>
+        <li>주요 AI 크롤러 명시적 허용 표기 (GPTBot, ClaudeBot, PerplexityBot 등)</li>
+        <li>국내 검색엔진(네이버 Yeti, 다음 Daumoa) 명시적 허용</li>
+      </ul>
+      <h4>허용해야 할 AI 봇 목록</h4>
+      <div class="tbl-wrap"><table class="tbl">
+        <tr><th>User-agent</th><th>운영사</th><th>용도</th><th>차단 시 영향</th></tr>
+        <tr><td>GPTBot</td><td>OpenAI</td><td>ChatGPT 학습</td><td>ChatGPT가 회사 정보를 모름</td></tr>
+        <tr><td>OAI-SearchBot</td><td>OpenAI</td><td>ChatGPT 실시간 검색</td><td>ChatGPT Search 답변에서 누락</td></tr>
+        <tr><td>ClaudeBot</td><td>Anthropic</td><td>Claude 학습·검색</td><td>Claude 답변에서 누락</td></tr>
+        <tr><td>PerplexityBot</td><td>Perplexity</td><td>답변 엔진 인용</td><td>Perplexity 인용 불가</td></tr>
+        <tr><td>Google-Extended</td><td>Google</td><td>Gemini 학습</td><td>Gemini가 회사 정보를 모름</td></tr>
+        <tr><td>Applebot-Extended</td><td>Apple</td><td>Apple Intelligence 학습</td><td>Siri/Apple AI 답변에서 누락</td></tr>
+        <tr><td>CCBot</td><td>Common Crawl</td><td>공개 웹 아카이브</td><td>다수 오픈소스 LLM 학습에서 누락</td></tr>
+      </table></div>
+      <div class="chip-row">
+        <span class="chip chip-orange">경영진 결정: B2B 노출이 핵심 목표이므로 AI 봇 전체 허용 강력 권장 (AI 답변 = 잠재 고객 접점)</span>
+      </div>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+
+    <!-- 0-4 -->
+    <div class="item-card" id="p0-4">
+      <div class="item-card-header">
+        <div class="item-card-num num-0">0-4</div>
+        <div class="item-card-title">Canonical 도메인 정책 결정 및 적용</div>
+        <div class="item-card-meta">담당: AX랩<br>결정 1일 + 적용 0.5일 · 병행 진행 가능</div>
+      </div>
+      <div class="goal-block warn">문제: skaiintelligence.co.kr 사이트의 canonical 태그가 .com 도메인을 가리키고 있어 색인 분산 위험 발생</div>
+      <h4>의사결정 옵션 비교</h4>
+      <div class="tbl-wrap"><table class="tbl">
+        <tr><th>평가 항목</th><th>옵션 A (.com 메인)</th><th>옵션 B (.co.kr 메인) ★권장</th></tr>
+        <tr><td>글로벌 노출</td><td>강함</td><td>약함</td></tr>
+        <tr><td>국내 SEO (네이버·다음)</td><td>보통</td><td>강함</td></tr>
+        <tr><td>현재 사용자 흐름</td><td>재구성 필요</td><td>그대로 유지</td></tr>
+        <tr><td>구현 난이도</td><td>중간 (전체 리다이렉트)</td><td>낮음 (canonical만 수정)</td></tr>
+      </table></div>
+      <div class="chip-row">
+        <span class="chip chip-orange">★ 박재성 팀장 권고: 옵션 B (.co.kr 메인) — 현재 사업 무게중심이 한국, 실제 사용자가 .co.kr로 접속 중</span>
+      </div>
+      <h4>옵션 B 선택 시 작업</h4>
+      <ul>
+        <li>모든 페이지의 canonical 태그를 .co.kr로 변경 (Next.js metadataBase 수정)</li>
+        <li>.com 도메인 → .co.kr로 301 영구 리다이렉트 (DNS 또는 Nginx 처리)</li>
+        <li>향후 글로벌 확장 시 .com을 영문 마이크로사이트로 재활용 가능</li>
+      </ul>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+  </div><!-- /phase 0 track section -->
+
+  <!-- Phase 0 일정표 -->
+  <div class="cal-wrap" style="margin-bottom:36px;">
+    <div class="cal-title">Phase 0 작업 일정 (3 영업일 권장)</div>
+    <div class="tbl-wrap"><table class="tbl">
+      <tr><th>일정</th><th>작업</th><th>담당</th></tr>
+      <tr><td><strong>Day 1 오전</strong></td><td>0-4 의사결정 시작 (.com vs .co.kr) + 0-1 코드 작성</td><td>AX랩</td></tr>
+      <tr><td><strong>Day 1 오후</strong></td><td>0-1 스테이징 배포 및 검증 + 0-2 sitemap.xml 초안 작성</td><td>AX랩</td></tr>
+      <tr><td><strong>Day 2 오전</strong></td><td>0-1 프로덕션 배포 + 0-2 sitemap.xml 배포</td><td>AX랩</td></tr>
+      <tr><td><strong>Day 2 오후</strong></td><td>0-3 robots.txt 배포 + 0-4 의사결정 완료 및 구현 시작</td><td>AX랩</td></tr>
+      <tr><td><strong>Day 3 오전</strong></td><td>0-4 canonical 수정 배포 + .com → .co.kr 301 리다이렉트</td><td>AX랩</td></tr>
+      <tr><td><strong>Day 3 오후</strong></td><td>전체 검증 체크리스트 통과 → Phase 1 돌입</td><td>AX랩</td></tr>
+    </table></div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- Phase 1 시작 -->
+  <div class="detail-title">Phase 1 — 상세 전략</div>
+  <div class="detail-sub">Phase 1: 사전 빌드업 (~5/25) · 인프라 깔기 + 콘텐츠·PR 준비 · 담당: 사업전략팀</div>
+
+  <div class="kv-row" style="margin-bottom:36px">
+    <div class="kv"><div class="kv-k">기간</div><div class="kv-v">~2026. 05. 25 (또는 06. 01)</div></div>
+    <div class="kv"><div class="kv-k">핵심 원칙</div><div class="kv-v">엠바고 유지 — 파트너사 실명 미공개, SKAI Intelligence 브랜드 교육 콘텐츠 형태로 선노출</div></div>
+    <div class="kv"><div class="kv-k">트랙 수</div><div class="kv-v">5개 (PR 트랙 신설)</div></div>
+  </div>
+
+  <!-- ═══ TRACK 1 ═══ -->
+  <div class="track-section">
+    <div class="track-heading ts-s">트랙 1. 검색 노출 트랙</div>
+
+    <!-- 1-1 -->
+    <div class="item-card" id="s1-1">
+      <div class="item-card-header">
+        <div class="item-card-num num-s">1-1</div>
+        <div class="item-card-title">네이버 키워드 광고<br><small style="font-size:12px;font-weight:400;color:#64748b">(합성데이터·피지컬AI·디지털트윈)</small></div>
+        <div class="item-card-meta">담당: 사업전략팀<br>기한: 이번 주 내</div>
+      </div>
+
+      <div class="goal-block">목표: MOU 발표 전 핵심 키워드 상위 광고 선점 — 경쟁자 없는 지금이 최저 단가 진입 타이밍</div>
+
+      <h4>실행 방법</h4>
+      <ul>
+        <li>searchad.naver.com 접속 → 법인 사업자 계정 개설</li>
+        <li>캠페인 유형: <strong>파워링크</strong> (검색광고)</li>
+        <li>첫 충전: 10~30만원 (VAT 별도) / 하루 예산: 1~3만원으로 시작</li>
+      </ul>
+
+      <h4>등록 키워드</h4>
+      <div class="code-block">합성데이터 / 합성데이터란 / 합성데이터 생성
+합성데이터 AI 학습 / 피지컬AI / Physical AI
+디지털트윈 제조업 / SKAI Intelligence</div>
+
+      <h4>광고 소재 예시</h4>
+      <ul>
+        <li>제목: <code style="background:#f1f5f9;padding:2px 8px;border-radius:4px;color:#0f766e;border:1px solid #e2e8f0">합성데이터 선도기업 SKAI Intelligence</code></li>
+        <li>설명: 산업용 AI 학습의 새로운 기준 — 합성데이터로 정밀도 혁신. 지금 확인하세요.</li>
+      </ul>
+
+      <h4>핵심 포인트</h4>
+      <div class="chip-row">
+        <span class="chip chip-red">예상 클릭 단가 100~300원</span>
+        <span class="chip chip-orange">경쟁 거의 없음 → 독점 가능</span>
+        <span class="chip chip-yellow">MOU 발표 직후 예산 2~3배 즉시 증액 사전 준비</span>
+      </div>
+      <ul style="margin-top:8px">
+        <li>랜딩페이지: SKAI Intelligence 홈페이지 내 합성데이터 전용 섹션 (없으면 선 제작)</li>
+      </ul>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+
+    <!-- 1-2 -->
+    <div class="item-card" id="s1-2">
+      <div class="item-card-header">
+        <div class="item-card-num num-s">1-2</div>
+        <div class="item-card-title">SEO 블로그 신설<br><small style="font-size:12px;font-weight:400;color:#64748b">인텔리전스 웹사이트 블로그 카테고리 신설 + AEO 동시 대응</small></div>
+        <div class="item-card-meta">담당: 사업전략팀<br>기한: 기획 5/23, 구현 5/25</div>
+      </div>
+
+      <div class="goal-block">목표: 합성데이터 관련 콘텐츠를 쌓을 공간 확보 → 구글 E-E-A-T 기반 권위 누적</div>
+
+      <h4>실행 방법</h4>
+      <ul>
+        <li>SKAI Intelligence 홈페이지 내 신규 카테고리 추가 요청</li>
+        <li>예: 인사이트 / 기술 블로그 / 합성데이터 가이드</li>
+        <li>최소 구성: Pillar 페이지 1개 + 서브 아티클 페이지 구조</li>
+      </ul>
+
+      <h4>Pillar 페이지 구성안</h4>
+      <div class="code-block">합성데이터 완벽 가이드 — SKAI Intelligence
+├── 합성데이터란?
+├── 합성데이터 생성 방법
+├── 실데이터 vs 합성데이터
+├── 산업별 활용 사례 (제조·로봇·자율주행)
+├── 피지컬 AI와 합성데이터
+└── SKAI Intelligence 솔루션 소개</div>
+
+      <h4>핵심 포인트</h4>
+      <ul>
+        <li>홈페이지 관리 업체에 카테고리 신설 + URL 구조 협의 (예: /insight/synthetic-data)</li>
+        <li>모든 페이지 title·meta description에 "합성데이터" 포함 요청</li>
+        <li>Schema Markup (구조화 데이터) 동시 삽입 요청</li>
+      </ul>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+
+    <!-- 1-3 -->
+    <div class="item-card" id="s1-3">
+      <div class="item-card-header">
+        <div class="item-card-num num-s">1-3</div>
+        <div class="item-card-title">AEO/SEO 동시 대응<br><small style="font-size:12px;font-weight:400;color:#64748b">네이버 지식인 + ChatGPT·Perplexity AI 검색 동시 대응</small></div>
+        <div class="item-card-meta">담당: 사업전략팀<br>기한: 소스 5/21(목)까지</div>
+      </div>
+
+      <div class="goal-block">목표: ChatGPT·Perplexity 등 AI 검색(AEO)과 구글 SEO 동시 대응 — "합성데이터" 검색 시 SKAI가 뜨는 구조</div>
+
+      <h4>AEO란?</h4>
+      <p>구글 SGE, ChatGPT, Perplexity 등 AI 검색 엔진이 답변 생성 시 SKAI 관련 콘텐츠를 출처로 인용하도록 최적화하는 작업</p>
+
+      <h4>외주사에 전달할 소스 문서 준비 사항</h4>
+      <ul>
+        <li>합성데이터 개념 정의 (400자 이내 명확한 설명)</li>
+        <li>SKAI Intelligence 소개 (회사명·설립 배경·핵심 기술)</li>
+        <li>글로벌 컨소시엄 현황 (엠바고 범위 내 공개 가능 수준)</li>
+        <li>FAQ 형태 Q&amp;A 10개 이상 (AI가 답변 생성 시 인용하기 좋은 포맷)</li>
+      </ul>
+
+      <h4>외주사 요청 사항</h4>
+      <ul>
+        <li>소스 기반 네이버 블로그·홈페이지·링크드인 SEO 문서 작성</li>
+        <li>"합성데이터"를 H1·H2·본문 첫 문단에 자연스럽게 삽입</li>
+        <li>모든 글에 SKAI Intelligence 홈페이지 URL 백링크 삽입 의무화</li>
+      </ul>
+
+      <div class="chip-row">
+        <span class="chip chip-red">SSL 인증서 갱신 선행 필수 — 현재 "안전하지 않은 사이트" 상태 → 구글 순위 하락</span>
+      </div>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+
+    <!-- 1-4 -->
+    <div class="item-card" id="s1-4">
+      <div class="item-card-header">
+        <div class="item-card-num num-s">1-4</div>
+        <div class="item-card-title">구글 애드 (Pillar 페이지 연동 · 글로벌용)</div>
+        <div class="item-card-meta">담당: 사업전략팀<br>기한: 계정 개설 5/25, 집행은 네이버 이후</div>
+      </div>
+
+      <div class="goal-block">목표: B2B 파트너·해외 투자자·글로벌 리서처 타깃 — 영문 키워드 동시 선점</div>
+
+      <h4>실행 방법</h4>
+      <ul>
+        <li>ads.google.com 접속 → Gmail 법인 계정으로 개설</li>
+        <li><strong>반드시 전문가 모드로 전환</strong> (스마트 모드 사용 금지)</li>
+        <li>캠페인 유형: 검색 캠페인 / 입찰 전략: 클릭수 최대화 (초반)</li>
+      </ul>
+
+      <h4>등록 키워드 (구문일치 "" 사용)</h4>
+      <div class="code-block">"합성데이터" / "synthetic data"
+"physical AI 합성데이터" / "합성 데이터 AI"
+"SKAI Intelligence" / "synthetic data Korea"</div>
+
+      <h4>광고 소재 후보 제목</h4>
+      <ul>
+        <li>합성데이터 선도기업 SKAI Intelligence</li>
+        <li>Synthetic Data — 글로벌 컨소시엄 선택</li>
+        <li>피지컬 AI 시대 합성데이터 솔루션</li>
+        <li>산업용 AI 학습의 새 기준</li>
+      </ul>
+
+      <div class="chip-row">
+        <span class="chip chip-orange">예상 클릭 단가 300~800원</span>
+        <span class="chip chip-yellow">권장 일 예산 1~2만원 / 월 20~30만원</span>
+      </div>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+  </div><!-- /track-section 1 -->
+
+  <div class="section-divider"></div>
+
+  <!-- ═══ TRACK 2 ═══ -->
+  <div class="track-section">
+    <div class="track-heading ts-c">트랙 2. 콘텐츠·원고 트랙</div>
+
+    <!-- 2-1 -->
+    <div class="item-card" id="s2-1">
+      <div class="item-card-header">
+        <div class="item-card-num num-c">2-1</div>
+        <div class="item-card-title">이재철 대표 기본 원고 작성<br><small style="font-size:12px;font-weight:400;color:#64748b">합성데이터 개념·시장 전망 기고문 · 키노트 초안</small></div>
+        <div class="item-card-meta">담당: 사업전략팀<br>기한: 초안 5/23(토)까지</div>
+      </div>
+
+      <div class="goal-block">목표: 대표 명의 공신력 있는 글로 합성데이터·SKAI 브랜드 권위 확보 — 언론 인터뷰·기고·키노트 기초 자료</div>
+
+      <h4>원고 구성안 3종</h4>
+      <div class="tbl-wrap"><table class="tbl">
+        <tr><th>원고 종류</th><th>분량</th><th>활용처</th></tr>
+        <tr><td>합성데이터 시장 전망 기고문</td><td>1,500자</td><td>전자신문·AI TODAY 기고</td></tr>
+        <tr><td>대표 인터뷰 Q&amp;A 원고</td><td>Q10개 분량</td><td>한경·매경 인터뷰 베이스</td></tr>
+        <tr><td>컴퓨텍스·WAIC 키노트 스크립트 초안</td><td>3분 분량</td><td>글로벌 행사 발표용</td></tr>
+      </table></div>
+
+      <h4>기고문 핵심 메시지 (엠바고 준수)</h4>
+      <ul>
+        <li>"합성데이터는 제2의 반도체다 — 데이터 주권 시대의 새로운 인프라"</li>
+        <li>글로벌 시장 연 30%+ 성장 + 국내 선점 기업 부재 강조</li>
+        <li>SKAI Intelligence 기술력 언급 (파트너사 실명은 MOU 후)</li>
+      </ul>
+
+      <h4>작성 프로세스</h4>
+      <ul>
+        <li>본부장 → 대표님 인터뷰 (30분) → 핵심 발언·철학 수집</li>
+        <li>사업전략팀 초안 작성 → 대표님 검수 → 언론사별 맞춤 편집본 제작</li>
+      </ul>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+
+    <!-- 2-2 -->
+    <div class="item-card" id="s2-2">
+      <div class="item-card-header">
+        <div class="item-card-num num-c">2-2</div>
+        <div class="item-card-title">시장 전망형 원고<br><small style="font-size:12px;font-weight:400;color:#64748b">합성데이터 시장 규모·투자 현황 · 글로벌 트렌드 기고</small></div>
+        <div class="item-card-meta">담당: 사업전략팀<br>기한: 초안 5/23(토)까지</div>
+      </div>
+
+      <div class="goal-block">목표: 합성데이터 시장 규모·성장성 데이터 기반 원고로 투자자·언론 관심 견인 — 기고·IR 자료 기반 활용</div>
+
+      <h4>핵심 메시지</h4>
+      <ul>
+        <li>글로벌 합성데이터 시장 연 30%+ 성장 (2024~2030)</li>
+        <li>피지컬 AI 시대 데이터 인프라의 핵심으로 부상</li>
+        <li>국내 선점 기업 부재 — SKAI Intelligence의 포지셔닝 기회</li>
+      </ul>
+
+      <h4>원고 활용처</h4>
+      <ul>
+        <li>전자신문·AI TODAY 기고문 (엠바고 준수 버전)</li>
+        <li>투자자 IR 덱 보조 자료</li>
+        <li>컴퓨텍스·WAIC 키노트 스크립트 기초 자료</li>
+      </ul>
+      <div class="chip-row">
+        <span class="chip chip-orange">파트너사 실명 언급 ❌ — 글로벌 컨소시엄 방향성 수준만</span>
+      </div>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+
+  </div><!-- /track-section 2 -->
+
+  <div class="section-divider"></div>
+
+  <!-- ═══ TRACK 3 ═══ -->
+  <div class="track-section">
+    <div class="track-heading ts-p">트랙 3. 파트너십 트랙</div>
+
+    <!-- 3-1 전문가 섭외 -->
+    <div class="item-card" id="s3-1">
+      <div class="item-card-header">
+        <div class="item-card-num num-p">3-1</div>
+        <div class="item-card-title">전문가 섭외<br><small style="font-size:12px;font-weight:400;color:#64748b">김대식 · 데이스 홍 · 미키피디아 · 정동선 · 김덕진 · 강정수</small></div>
+        <div class="item-card-meta">담당: 사업전략팀<br>기한: 1차 컨택 5/23(토)까지</div>
+      </div>
+
+      <div class="goal-block">목표: AI·경제 업계 공신력 있는 전문가의 발화로 SKAI 합성데이터 기술 신뢰도 제고</div>
+
+      <div class="tbl-wrap"><table class="tbl">
+        <tr><th>전문가</th><th>포지션</th><th>접근 방식</th><th>활용 채널</th></tr>
+        <tr><td><strong>김대식</strong> (KAIST 교수)</td><td>AI 학계 권위자</td><td>강연·기고 협력 요청</td><td>언론 인터뷰 + 유튜브</td></tr>
+        <tr><td><strong>데이스 홍</strong></td><td>AI 유튜버</td><td>협찬 콘텐츠 or 공동 기획</td><td>유튜브·인스타</td></tr>
+        <tr><td><strong>미키피디아</strong></td><td>테크 유튜버</td><td>제품 체험·리뷰 형태</td><td>유튜브</td></tr>
+        <tr><td><strong>정동선</strong></td><td>경제·투자 전문가</td><td>합성데이터 투자 가치 발화</td><td>유튜브·팟캐스트</td></tr>
+        <tr><td><strong>김덕진</strong></td><td>IT 전문 유튜버·저술가</td><td>교육 콘텐츠 공동 기획</td><td>유튜브·SNS</td></tr>
+        <tr><td><strong>강정수</strong></td><td>AI·미디어 전문가</td><td>강연·칼럼 협력 요청</td><td>언론·팟캐스트</td></tr>
+      </table></div>
+
+      <h4>공통 접근 원칙</h4>
+      <p>제품 홍보 요청 ❌ → <strong>"합성데이터 시장을 같이 이야기해보자"</strong> 교육 콘텐츠 형태로 접근</p>
+      <div class="quote">"합성데이터가 왜 피지컬 AI 시대의 핵심인지 — 업계에서 먼저 알고 있어야 할 내용을 먼저 공유드리고 싶습니다."</div>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+
+    <!-- 3-2 유튜브 채널 접촉 -->
+    <div class="item-card" id="s3-2">
+      <div class="item-card-header">
+        <div class="item-card-num num-p">3-2</div>
+        <div class="item-card-title">유튜브 채널 직접 DM<br><small style="font-size:12px;font-weight:400;color:#64748b">슈카월드 · 삼프로TV · 지식인사이드 · SOD</small></div>
+        <div class="item-card-meta">담당: 사업전략팀<br>기한: DM 발송 5/22(금)까지, 계약 MOU 전 완료</div>
+      </div>
+
+      <div class="goal-block">목표: 경제·투자·테크 유튜버 협찬 콘텐츠로 MOU 발표 직후 대규모 인지도 폭발</div>
+
+      <div class="tbl-wrap"><table class="tbl">
+        <tr><th>채널</th><th>구독자</th><th>특징</th><th>단가 (추정)</th></tr>
+        <tr><td><strong>슈카월드</strong></td><td>약 270만</td><td>경제·트렌드 풀어쓰기</td><td>2~3천만원/편</td></tr>
+        <tr><td><strong>삼프로TV</strong></td><td>약 130만</td><td>주식·경제 전문 투자자</td><td>2~3천만원/편</td></tr>
+        <tr><td><strong>지식인사이드</strong></td><td>약 100만</td><td>AI·테크 심층 분석</td><td>1~2천만원/편</td></tr>
+        <tr><td><strong>SOD</strong></td><td>약 50만</td><td>스타트업·창업 콘텐츠</td><td>500~1천만원/편</td></tr>
+      </table></div>
+
+      <h4>DM 초안 방향</h4>
+      <div class="quote">"안녕하세요, SKAI Worldwide 마케팅본부장 정원영입니다.<br>
+      곧 공표될 글로벌 산업용 AI 관련 협약 관련하여 NDA 범위 내에서 먼저 공유드리고 싶은 내용이 있습니다. 합성데이터 시장이 주제인데, 채널 성격과 잘 맞을 것 같아 연락드립니다."</div>
+
+      <div class="chip-row">
+        <span class="chip chip-red">NDA 체결 (MOU 발표 전 정보 유출 방지)</span>
+        <span class="chip chip-orange">발행 타이밍: MOU 발표 당일 또는 익일</span>
+        <span class="chip chip-yellow">영상 설명란 홈페이지 URL 필수 삽입</span>
+      </div>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+
+    <!-- 3-3 파워블로거 -->
+    <div class="item-card" id="s3-3">
+      <div class="item-card-header">
+        <div class="item-card-num num-p">3-3</div>
+        <div class="item-card-title">파워블로거 섭외 — 에이토즈 활용<br><small style="font-size:12px;font-weight:400;color:#64748b">5/22(금) 10:30 미팅 · 잔액 357만원 전환</small></div>
+        <div class="item-card-meta">담당: 사업전략팀<br>기한: 5/22(금) 10:30</div>
+      </div>
+
+      <div class="goal-block">목표: 잔액 357만원 합성데이터 블로거 섭외로 전환 — 네이버 VIEW탭 선점 + 백링크 누적</div>
+
+      <h4>핵심 확인 사항</h4>
+      <ul>
+        <li>잔액 357만원 확인서 수령 (구두 + 서면)</li>
+        <li>잔액의 합성데이터 키워드 네이버 블로그 섭외 전환 가능 여부</li>
+        <li>B2B 테크·AI 분야 파워블로거 풀 보유 여부</li>
+        <li>NDA 체결 가능 여부 (엠바고 블로거까지 적용)</li>
+      </ul>
+
+      <h4>계약 레드라인</h4>
+      <div class="chip-row">
+        <span class="chip chip-red">NDA 필수 (블로거 개인까지 적용)</span>
+        <span class="chip chip-red">편당 3,000자 이상</span>
+        <span class="chip chip-orange">홈페이지 URL 백링크 삽입 의무화</span>
+        <span class="chip chip-yellow">월 성과 리포트 제공</span>
+      </div>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+
+    <!-- 3-4 커뮤니티 사이트 생성 -->
+    <div class="item-card" id="s3-4">
+      <div class="item-card-header">
+        <div class="item-card-num num-p">3-4</div>
+        <div class="item-card-title">커뮤니티 사이트 생성<br><small style="font-size:12px;font-weight:400;color:#64748b">네이버 블로그와 병행 운영 — SKAI 합성데이터 자체 채널 구축</small></div>
+        <div class="item-card-meta">담당: 사업전략팀<br>기한: 5/22(금) 또는 5/23(토)</div>
+      </div>
+
+      <div class="goal-block">목표: SKAI 합성데이터 관련 자체 커뮤니티 공간 구축 — 네이버 블로그와 병행 운영으로 SEO·자연 확산 기반 조성</div>
+
+      <h4>커뮤니티 사이트 생성</h4>
+      <ul>
+        <li>플랫폼 결정: 네이버 카페 (국내 검색 연동 강점) 또는 독립 운영 커뮤니티</li>
+        <li>주제: 합성데이터·피지컬AI·SKAI Intelligence 관련 정보 공유</li>
+        <li>운영 구조: 공지 게시판 + 자유 게시판 + 자료실</li>
+        <li>초기 시드 콘텐츠: 합성데이터 개념 정리글 5~10편 사전 업로드</li>
+      </ul>
+
+      <h4>네이버 블로그 병행</h4>
+      <ul>
+        <li>SKAI 공식 네이버 블로그 개설 (없는 경우 즉시 신설)</li>
+        <li>SEO 블로그(s1-2)와 연동: 웹사이트 콘텐츠 → 네이버 블로그 크로스 포스팅</li>
+        <li>합성데이터 키워드 네이버 VIEW탭 선점 목표</li>
+      </ul>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+
+    <!-- 3-5 바이럴 파트너 확보 -->
+    <div class="item-card" id="s3-5">
+      <div class="item-card-header">
+        <div class="item-card-num num-p">3-5</div>
+        <div class="item-card-title">바이럴 파트너 확보<br><small style="font-size:12px;font-weight:400;color:#64748b">카페·커뮤니티·카톡오픈채팅·인스타 파트너 사전 확보</small></div>
+        <div class="item-card-meta">담당: 사업전략팀<br>기한: 파트너 확정 5/23(토)까지</div>
+      </div>
+
+      <div class="goal-block">목표: MOU 발표 직후 커뮤니티 자연 확산 구조 확보 — 기술·비전 중심 콘텐츠로 유기적 공유 유도</div>
+
+      <h4>타깃 채널 파트너</h4>
+      <ul>
+        <li>네이버 카페 (주식·투자·AI 관련 대형 카페 운영자 또는 활성 멤버)</li>
+        <li>디시인사이드·클리앙·뽐뿌 등 커뮤니티 인플루언서</li>
+        <li>카카오톡 오픈채팅·단톡방 운영자 (투자자·AI 관심 채널)</li>
+        <li>인스타그램 릴스·틱톡 숏폼 크리에이터</li>
+      </ul>
+
+      <h4>파트너 확보 방향</h4>
+      <ul>
+        <li>MOU 발표 타이밍에 동시 게시할 수 있도록 사전 계약·NDA 체결</li>
+        <li>기술·비전 중심 자연스러운 발화 — 홍보 목적 명시 후 협의</li>
+        <li>인당 지급 기준 또는 성과 기반 수수료 구조 협의</li>
+        <li>콘텐츠 방향: 합성데이터 개념 카드뉴스 / 글로벌 컨소시엄 소식 (실명 미포함)</li>
+      </ul>
+      <div class="chip-row"><span class="chip chip-red">주가 자극 표현 ❌ → 기술·비전 중심 콘텐츠만</span></div>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+
+    <!-- 3-6 MOU 발표 전후 바이럴 전략 -->
+    <div class="item-card" id="s3-6">
+      <div class="item-card-header">
+        <div class="item-card-num num-p">3-6</div>
+        <div class="item-card-title">MOU 발표 전후 바이럴 전략<br><small style="font-size:12px;font-weight:400;color:#64748b">발표 D-7 ~ D+7 집중 대응 플레이북</small></div>
+        <div class="item-card-meta">담당: 사업전략팀<br>기한: 파트너 확정 5/23(토), 플레이북 완성 5/25(월)</div>
+      </div>
+
+      <div class="goal-block">목표: MOU 발표 타이밍에 맞춰 유튜브·언론·커뮤니티·SNS가 동시에 터지는 구조 설계</div>
+
+      <h4>발표 전 (D-7 ~ D-1): 빌드업</h4>
+      <ul>
+        <li>유튜버 NDA 계약 완료 + 영상 제작 착수</li>
+        <li>파워블로거 원고 작성 완료 (엠바고 상태 대기)</li>
+        <li>언론사 보도자료 초안 완성 (PR 에이전시와 협의)</li>
+        <li>커뮤니티 운영자 사전 협의 완료</li>
+      </ul>
+
+      <h4>발표 당일 (D-Day): 동시 공개</h4>
+      <ul>
+        <li>유튜브 영상 공개 (슈카·삼프로TV·지식인사이드 중 1~2개)</li>
+        <li>3대 언론사 동시 기사화 (매경·한경·전자신문)</li>
+        <li>네이버 블로그 10편 동시 배포</li>
+        <li>커뮤니티 동시 게시</li>
+      </ul>
+
+      <h4>발표 후 (D+1 ~ D+7): 후속 확산</h4>
+      <ul>
+        <li>나머지 유튜버 영상 순차 공개</li>
+        <li>전문가 발화 콘텐츠 배포</li>
+        <li>인스타·링크드인 숏폼 파생 콘텐츠 배포</li>
+      </ul>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+    <!-- 3-7 경제IT 언론사 컨택 -->
+    <div class="item-card" id="s3-7">
+      <div class="item-card-header">
+        <div class="item-card-num num-p">3-7</div>
+        <div class="item-card-title">경제IT 언론사 컨택<br><small style="font-size:12px;font-weight:400;color:#64748b">PR 에이전시 전략 수급 · MOU 당일 3대 언론사 동시 기사화</small></div>
+        <div class="item-card-meta">담당: 사업전략팀<br>기한: 5/23(토)까지 미팅 완료, 후보 2~3사 압축</div>
+      </div>
+
+      <div class="goal-block">목표: MOU 발표 당일 매경·한경·전자신문 동시 기사화를 위한 PR 에이전시 파트너 확보</div>
+
+      <h4>에이전시 선정 기준</h4>
+      <ul>
+        <li>경제·IT 언론사 기자 네트워크 보유 여부</li>
+        <li>보도자료 배포 + 기자회견 운영 경험</li>
+        <li>B2B 테크 기업 PR 레퍼런스</li>
+        <li>MOU 당일 긴급 대응 가능 체계 (엠바고 관리 경험)</li>
+      </ul>
+
+      <h4>미팅에서 요청할 사항</h4>
+      <ul>
+        <li>커버 가능한 언론사 리스트 (매경·한경·전자신문 포함 여부 필수 확인)</li>
+        <li>보도자료 배포 + 기자회견 패키지 견적</li>
+        <li>한·영·중 3개 언어 보도자료 번역·배포 가능 여부</li>
+      </ul>
+
+      <div class="chip-row">
+        <span class="chip chip-red">Phase 2 MOU 발표 당일 3대 언론사 동시 기사화 목표</span>
+        <span class="chip chip-orange">기자회견 형태 권장 (단순 보도자료 배포 지양)</span>
+      </div>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+  </div><!-- /track-section 3 -->
+
+  <div class="section-divider"></div>
+
+  <!-- ═══ TRACK 4 ═══ -->
+  <div class="track-section">
+    <div class="track-heading ts-b">트랙 4. 벤치마킹 트랙</div>
+
+    <!-- 4-1 Scale AI MOU 사례 -->
+    <div class="item-card" id="s4-1">
+      <div class="item-card-header">
+        <div class="item-card-num num-b">4-1</div>
+        <div class="item-card-title">Scale AI 등 MOU 사례 분석<br><small style="font-size:12px;font-weight:400;color:#64748b">유사 기술 기업 MOU 발표 성공 패턴 수집</small></div>
+        <div class="item-card-meta">담당: 사업전략팀<br>기한: 자료 수령 5/23(토)까지</div>
+      </div>
+
+      <div class="goal-block">목표: Scale AI·Palantir 등 B2B AI 기업의 파트너십 발표 성공 사례 수집 → Phase 2 전략 고도화에 반영</div>
+
+      <h4>분석 대상 기업</h4>
+      <div class="tbl-wrap"><table class="tbl">
+        <tr><th>기업</th><th>MOU/계약 유형</th><th>벤치마킹 포인트</th></tr>
+        <tr><td><strong>Scale AI</strong></td><td>글로벌 방산·자동차 계약</td><td>합성데이터 B2B 발표 구조, 언론 반응 패턴</td></tr>
+        <tr><td><strong>Palantir</strong></td><td>정부·방산 계약</td><td>계약 발표 타이밍과 주가 반응 연계 방식</td></tr>
+        <tr><td><strong>국내 AI 상장사</strong></td><td>KOSDAQ AI 기업 MOU</td><td>국내 IR 연동 전략, 언론사 선택 패턴</td></tr>
+      </table></div>
+
+      <h4>요청 내용</h4>
+      <div class="code-block">1. 언론 보도 후 주가 반응 패턴 (참고용)
+2. 글로벌 파트너십 발표 시 국내 IR 연동 전략
+3. 기자회견 vs 보도자료 배포 효과 비교
+4. 합성데이터·피지컬AI 관련 투자자 관심도 데이터</div>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+
+    <!-- 4-2 기술전문매체 기사화 -->
+    <div class="item-card" id="s4-2">
+      <div class="item-card-header">
+        <div class="item-card-num num-b">4-2</div>
+        <div class="item-card-title">기술전문매체 기사화 사례 분석<br><small style="font-size:12px;font-weight:400;color:#64748b">전자신문·ZDNet·AI TODAY 성공 보도 패턴 분석</small></div>
+        <div class="item-card-meta">담당: 사업전략팀<br>기한: 5/22(금)까지 사례 3건 이상 정리</div>
+      </div>
+
+      <div class="goal-block">목표: 기술 전문 매체에서 성공적으로 기사화된 AI 기업 사례 분석 → 전자신문 보도 협의에 활용</div>
+
+      <h4>분석 포인트</h4>
+      <div class="code-block">1. 어떤 앵글로 접근했는가 (기술? 시장? 사람?)
+2. 기사 제목 패턴 (숫자·대비·질문형 등)
+3. 글로벌 파트너사 언급 방식
+4. 기사 발행 후 후속 인용·확산 경로
+5. 기자 이름 → 직접 컨택 대상으로 활용</div>
+
+      <h4>분석 대상 매체</h4>
+      <ul>
+        <li>전자신문 — IT 업계 대표 매체, 기획기사 형태 접근</li>
+        <li>ZDNet Korea — 기술 심층 분석 강점</li>
+        <li>AI TODAY — AI 전문 매체, 독자층 B2B 집중</li>
+      </ul>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+
+    <!-- 4-3 주가상승 동반 마케팅 -->
+    <!-- 4-3 주가상승 동반 마케팅 →  v0.1 4-2 내용 사용 -->
+    <div class="item-card" id="s4-3">
+      <div class="item-card-header">
+        <div class="item-card-num num-b">4-3</div>
+        <div class="item-card-title">주가 상승 동반 마케팅 사례 벤치마킹<br><small style="font-size:12px;font-weight:400;color:#64748b">성호전자 · 레인보우로보틱스 · 갤럭시코퍼레이션</small></div>
+        <div class="item-card-meta">담당: 사업전략팀<br>기한: 5/22(금)까지 스크리닝 완료, 1페이지 요약</div>
+      </div>
+
+      <div class="goal-block">목표: 주가 상승 흐름과 마케팅 활동이 맞물린 국내 상장사 사례 분석 → MOU 발표 전후 SKAI 마케팅 실행 계획에 직접 반영</div>
+
+      <div class="alert-box alert-warn">
+        <strong>벤치마킹 배경 (신재혁 대표님 제안):</strong> 성호전자의 2024년 12월 ~ 2025년 3~4월 주가 상승 구간을 보면, 상승 직전·직후에 사전 릴리즈된 마케팅 사례들이 있다. 이 패턴을 분석해 SKAI MOU 발표 캠페인에 적용한다.
+      </div>
+
+      <h4>벤치마킹 대상 3개사</h4>
+      <table class="tbl">
+        <tr><th>기업</th><th>주가 상승 배경</th><th>마케팅 특징</th><th>SKAI 참고 포인트</th></tr>
+        <tr>
+          <td><strong>성호전자</strong><br><span style="font-size:11px;color:#64748b">KOSDAQ · 전자부품</span></td>
+          <td>NVIDIA Omniverse 파트너 + 피지컬 AI 수혜주로 편입<br>2024.12 ~ 2025.03 급등</td>
+          <td>기술 파트너십 공시 → 유튜버·언론 동시 커버리지 → 검색량 폭발</td>
+          <td>파트너사 이름을 전면에 배치한 보도자료 앵글 / 유튜버 협찬 타이밍</td>
+        </tr>
+        <tr>
+          <td><strong>레인보우로보틱스</strong><br><span style="font-size:11px;color:#64748b">KOSDAQ · 협동로봇</span></td>
+          <td>삼성전자 최대주주 등극 + NVIDIA 파트너십<br>2024.12 ~ 2025.04 급등</td>
+          <td>삼성 협력 공시 직후 신사임당·유튜버 폭발적 커버리지 → 후속 언론 기사 추가 상승</td>
+          <td>대형 파트너 공시 → 유튜버 선점 → 언론 후속 확산 3단계 흐름</td>
+        </tr>
+        <tr>
+          <td><strong>갤럭시코퍼레이션</strong><br><span style="font-size:11px;color:#64748b">KOSDAQ · 엔터테크</span></td>
+          <td>MOU 릴리즈 연속 발표 (대학·기관 다수)<br>네이버 검색량 급등 동반</td>
+          <td>단기간 다수 MOU 발표로 언론 노출 누적 → 네이버 뉴스 상단 점령 → 검색 유입</td>
+          <td>MOU 릴리즈를 단건이 아닌 연속 발표로 노출 극대화하는 전략</td>
+        </tr>
+      </table>
+
+      <h4>공통 분석 채널</h4>
+      <table class="tbl">
+        <tr><th>채널</th><th>확인 항목</th></tr>
+        <tr><td>네이버 뉴스·블로그</td><td>발행 타이밍 vs 주가 변동 시점 비교 / 키워드·앵글</td></tr>
+        <tr><td>유튜브</td><td>어떤 채널이 언제 올렸는지 / 조회수·반응 / 협찬 여부</td></tr>
+        <tr><td>IR 자료·공시</td><td>기술 설명 방식 / 파트너사 언급 방식 / 수치 표현</td></tr>
+        <tr><td>언론사 기사</td><td>보도자료 앵글 / 매체 선택 / 후속 인용 확산 경로</td></tr>
+      </table>
+
+      <div class="goal-block warn">잘된 것 → SKAI MOU 발표 캠페인에 즉시 적용 / 못된 것 → 차별화 포인트로 활용</div>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+
+
+    <!-- 4-4 헤드라인 공식 추출 -->
+    <div class="item-card" id="s4-4">
+      <div class="item-card-header">
+        <div class="item-card-num num-b">4-4</div>
+        <div class="item-card-title">대표님 전달 헤드라인 레퍼런스 분석<br><small style="font-size:12px;font-weight:400;color:#64748b">SKAI 콘텐츠·언론·유튜버 DM 제목 공식 적용</small></div>
+        <div class="item-card-meta">담당: 사업전략팀<br>기한: 5/22(금) 콘텐츠 제목 초안 반영 완료</div>
+      </div>
+
+      <div class="goal-block">목표: 신재혁 대표가 공유한 41개 레퍼런스에서 클릭·바이럴을 만드는 헤드라인 공식을 추출 → 네이버 블로그 제목·언론 보도자료 앵글·유튜버 DM 문구에 직접 적용</div>
+
+      <div class="alert-box alert-warn" style="margin-bottom:16px">
+        <strong>배경:</strong> 신재혁 대표가 수집한 41개 기사·유튜브 썸네일은 투자자·언론이 실제로 반응한 헤드라인 데이터입니다. 이 패턴을 SKAI 콘텐츠 제목에 그대로 이식합니다.
+      </div>
+
+      <h4>7가지 핵심 헤드라인 공식</h4>
+      <table class="tbl">
+        <tr><th>#</th><th>공식</th><th>레퍼런스 예시</th><th>SKAI 적용 제목</th></tr>
+        <tr>
+          <td><span class="chip chip-red">1</span></td>
+          <td><strong>글로벌 빅테크가 먼저 찾아온</strong></td>
+          <td>"글로벌이 먼저 찾았다…AI로 언어장벽 허무는 플리토"<br>"젠슨황이 준다는 GPU 26만장"</td>
+          <td>"글로벌이 먼저 찾아온 기술 — 합성데이터, 한국에서 먼저 선점하는 기업이 이긴다"</td>
+        </tr>
+        <tr>
+          <td><span class="chip chip-red">2</span></td>
+          <td><strong>숫자 충격 (규모 + 배수)</strong></td>
+          <td>"30조원 독점 수주", "시총 169조 날아간", "5년 뒤 1000배"</td>
+          <td>"3천조 시장, 한국엔 아직 선점한 기업이 없다 — 합성데이터 지금이 기회"</td>
+        </tr>
+        <tr>
+          <td><span class="chip chip-orange">3</span></td>
+          <td><strong>판을 뒤집는다</strong></td>
+          <td>"발칵 뒤집힌 로봇 시장", "자동차 버린 현대차?"</td>
+          <td>"제조업의 판을 뒤집는 합성데이터 — SKAI Intelligence가 선언한다"</td>
+        </tr>
+        <tr>
+          <td><span class="chip chip-orange">4</span></td>
+          <td><strong>MOU / 파트너십 = 신뢰 신호</strong></td>
+          <td>"세기의 만남, 결국 터졌다!" "싱가포르 정부와 2가지 MOU"</td>
+          <td>"결국 터졌다 — SKAI Intelligence, [파트너]와 합성데이터 공급 계약 체결"</td>
+        </tr>
+        <tr>
+          <td><span class="chip chip-yellow">5</span></td>
+          <td><strong>투자자 심리 자극</strong></td>
+          <td>"지금 싸도 너무 쌉니다", "눈 딱 감고 50만원 간다"</td>
+          <td>"합성데이터 무슨 기술이길래 엔비디아가 전부 베팅했을까 — 지금 알아야 하는 이유"</td>
+        </tr>
+        <tr>
+          <td><span class="chip chip-yellow">6</span></td>
+          <td><strong>의문형 (궁금증 유발)</strong></td>
+          <td>"무슨 회사길래?", "AI버블은 진짜일까", "소름 돋는 이유"</td>
+          <td>"합성데이터, 무슨 기술이길래 엔비디아가 전부 베팅했을까?"</td>
+        </tr>
+        <tr>
+          <td><span class="chip chip-green">7</span></td>
+          <td><strong>피지컬 AI × 로봇 연계</strong></td>
+          <td>"LG전자, 엔비디아가 찜했다…발칵 뒤집힌 로봇 시장"<br>"피지컬 AI로 안전 공사장 실현"</td>
+          <td>"피지컬 AI 로봇, 합성데이터 없이는 학습 못 한다 — 소름 돋는 이유"</td>
+        </tr>
+      </table>
+
+      <h4 style="margin-top:20px">채널별 기사 앵글 (MOU 발표 직후 적용)</h4>
+      <table class="tbl">
+        <tr><th>채널</th><th>추천 앵글</th><th>적용 공식</th></tr>
+        <tr>
+          <td><strong>언론 보도자료</strong></td>
+          <td>"글로벌이 먼저 찾은 합성데이터 — SKAI Intelligence, [파트너명]와 MOU 체결"</td>
+          <td><span class="chip chip-blue" style="font-size:11px;padding:3px 8px;display:inline-block;margin-bottom:4px">공식 1</span><br><span class="chip chip-orange" style="font-size:11px;padding:3px 8px;display:inline-block">공식 4</span></td>
+        </tr>
+        <tr>
+          <td><strong>슈카·삼프로TV DM</strong></td>
+          <td>"엔비디아가 피지컬 AI에 올인하는 이유, 합성데이터 때문입니다 — 국내 유일 기업 SKAI"</td>
+          <td><span class="chip chip-blue" style="font-size:11px;padding:3px 8px;display:inline-block;margin-bottom:4px">공식 1</span><br><span class="chip chip-green" style="font-size:11px;padding:3px 8px;display:inline-block">공식 7</span></td>
+        </tr>
+        <tr>
+          <td><strong>신사임당·부읽남TV DM</strong></td>
+          <td>"합성데이터 무슨 기술이길래 엔비디아가 전부 베팅했을까 — 국내 유일 기업 지금 알아야 하는 이유"</td>
+          <td><span class="chip chip-yellow" style="font-size:11px;padding:3px 8px;display:inline-block;margin-bottom:4px">공식 5</span><br><span class="chip chip-yellow" style="font-size:11px;padding:3px 8px;display:inline-block">공식 6</span></td>
+        </tr>
+        <tr>
+          <td><strong>네이버 블로그 제목</strong></td>
+          <td>"합성데이터 무슨 회사길래? 3천조 시장 한국 기업이 선점했다"</td>
+          <td><span class="chip chip-red" style="font-size:11px;padding:3px 8px;display:inline-block;margin-bottom:4px">공식 2</span><br><span class="chip chip-yellow" style="font-size:11px;padding:3px 8px;display:inline-block">공식 6</span></td>
+        </tr>
+        <tr>
+          <td><strong>인스타 카드뉴스</strong></td>
+          <td>"5년 뒤 1000배 시장, 아직 모른다면?"</td>
+          <td><span class="chip chip-red" style="font-size:11px;padding:3px 8px;display:inline-block">공식 2</span></td>
+        </tr>
+        <tr>
+          <td><strong>이데일리TV·KBS경제한방</strong></td>
+          <td>"엔비디아가 고른 로봇의 두뇌 — 합성데이터, 한국 기업이 선점하나"</td>
+          <td><span class="chip chip-blue" style="font-size:11px;padding:3px 8px;display:inline-block;margin-bottom:4px">공식 1</span><br><span class="chip chip-green" style="font-size:11px;padding:3px 8px;display:inline-block">공식 7</span></td>
+        </tr>
+      </table>
+
+      <div class="goal-block warn" style="margin-top:16px">
+        <strong>핵심 스토리라인:</strong> 피지컬 AI가 폭발하는 지금, 로봇은 합성데이터 없이 학습할 수 없다. 이 논리를 모든 채널 콘텐츠의 첫 문장으로 통일한다.
+      </div>
+
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+  </div><!-- /track-section 4 -->
+
+  <div class="section-divider"></div>
+
+  <!-- ═══ TRACK 5 ═══ -->
+  <div class="track-section">
+    <div class="track-heading ts-pr">트랙 5. PR 트랙</div>
+
+    <!-- 5-1 합성데이터 기획기사 -->
+    <div class="item-card" id="s5-1">
+      <div class="item-card-header">
+        <div class="item-card-num num-pr">5-1</div>
+        <div class="item-card-title">합성데이터 기획기사<br><small style="font-size:12px;font-weight:400;color:#64748b">전문 기획기사 형태 · AI TODAY·전자신문 타깃</small></div>
+        <div class="item-card-meta">담당: PR팀<br>기한: 기자 컨택 5/22, 협의 5/25까지</div>
+      </div>
+
+      <div class="goal-block">목표: 합성데이터 시장을 다루는 심층 기획기사 → SKAI를 업계 주도 기업으로 자연스럽게 포지셔닝</div>
+
+      <h4>제안 앵글</h4>
+      <div class="quote">"피지컬 AI 시대, 합성데이터가 새로운 석유다 — 국내 선점 기업 SKAI Intelligence의 전략"<br>
+      (MOU 전이므로 "글로벌 기업과 협력 중인 국내 합성데이터 기업" 정도로 표현)</div>
+
+      <h4>전달 자료 패키지</h4>
+      <ul>
+        <li>합성데이터 시장 규모 데이터 (글로벌·국내)</li>
+        <li>SKAI Intelligence 기술 개요 1페이지</li>
+        <li>이재철 대표 코멘트 (인용 가능한 형태로 준비)</li>
+      </ul>
+      <div class="chip-row">
+        <span class="chip chip-red">파트너사 실명 ❌ MOU 전</span>
+        <span class="chip chip-orange">MOU 발표 당일 실명 포함 후속 기사 연결 약속</span>
+      </div>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+
+    <!-- 5-2 중국 국제 공급망 촉진 박람회 르포 -->
+    <div class="item-card" id="s5-2">
+      <div class="item-card-header">
+        <div class="item-card-num num-pr">5-2</div>
+        <div class="item-card-title">중국 국제 공급망 촉진 박람회 르포기사<br><small style="font-size:12px;font-weight:400;color:#64748b">Phase 3 · 2026.06.22 상하이 · 르포기사 + 사진기사</small></div>
+        <div class="item-card-meta">담당: PR팀<br>기한: 6/22 박람회 당일 현장 취재</div>
+      </div>
+
+      <div class="goal-block">목표: 중국 국제 공급망 촉진 박람회 현장 르포 → "피지컬 AI 시대 글로벌 공급망의 실상" 기사화로 SKAI 글로벌 현장감 전달</div>
+
+      <h4>취재 앵글</h4>
+      <ul>
+        <li>현장 르포: 글로벌 공급망·피지컬 AI 트렌드 생생 전달</li>
+        <li>SKAI Intelligence 참가 의미 — 한국 합성데이터 기업의 글로벌 무대 진출</li>
+        <li>사진기사: 전시 부스, 네트워킹 현장, 주요 인물 인터뷰 사진</li>
+      </ul>
+
+      <h4>매체 연계</h4>
+      <div class="tbl-wrap"><table class="tbl">
+        <tr><th>매체</th><th>기사 형태</th><th>게재 타이밍</th></tr>
+        <tr><td>전자신문</td><td>현장 르포 (1,500자)</td><td>박람회 익일 (6/23)</td></tr>
+        <tr><td>ZDNet Korea</td><td>사진기사 + 요약</td><td>박람회 당일 또는 익일</td></tr>
+        <tr><td>AI TODAY</td><td>글로벌 AI 트렌드 연결 기사</td><td>6/23~6/25 중</td></tr>
+      </table></div>
+
+      <div class="chip-row">
+        <span class="chip chip-blue">중국 박람회 → WAIC 2026 글로벌 연장선 스토리 연결</span>
+      </div>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+
+    <!-- 5-3 SKAI X A사 보도자료 -->
+    <div class="item-card" id="s5-3">
+      <div class="item-card-header">
+        <div class="item-card-num num-pr">5-3</div>
+        <div class="item-card-title">SKAI X A사 공식 보도자료<br><small style="font-size:12px;font-weight:400;color:#64748b">MOU 발표 당일 배포 · 한·영·중 3개 언어</small></div>
+        <div class="item-card-meta">담당: PR팀<br>기한: MOU 발표 D-3일 초안 완성</div>
+      </div>
+
+      <div class="goal-block">목표: MOU 발표 당일 언론사·IR사·공시 동시 배포 가능한 완성형 보도자료 사전 준비</div>
+
+      <h4>보도자료 구성</h4>
+      <ul>
+        <li>헤드라인: 임팩트 있는 한 문장 (4-4 헤드라인 공식 활용)</li>
+        <li>리드: 파트너십의 의미와 규모 (2~3문장)</li>
+        <li>본문: 기술적 배경 + SKAI 역할 + 글로벌 파트너 의미</li>
+        <li>경영진 코멘트: 이재철 대표 + 글로벌 파트너사 임원</li>
+        <li>회사 소개 (Boilerplate)</li>
+      </ul>
+
+      <h4>배포 채널</h4>
+      <div class="chip-row">
+        <span class="chip chip-blue">3대 경제지 기자 직접 송부</span>
+        <span class="chip chip-blue">공식 보도자료 배포 서비스 (뉴스와이어 등)</span>
+        <span class="chip chip-blue">글로벌: PR Newswire (영문)</span>
+        <span class="chip chip-orange">공시 타이밍과 언론 배포 타이밍 법무 확인 필수</span>
+      </div>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+
+    <!-- 5-4 CEO 인터뷰 -->
+    <div class="item-card" id="s5-4">
+      <div class="item-card-header">
+        <div class="item-card-num num-pr">5-4</div>
+        <div class="item-card-title">CEO 인터뷰 2회<br><small style="font-size:12px;font-weight:400;color:#64748b">AI TODAY + 한국경제 · MOU 발표 전후</small></div>
+        <div class="item-card-meta">담당: PR팀<br>기한: 자료 패키지 5/22(금)까지</div>
+      </div>
+
+      <div class="goal-block">목표: 이재철 대표 명의 공신력 있는 인터뷰 2편 — MOU 전(교육형) + MOU 후(실명 포함) 2단계 기사화</div>
+
+      <div class="tbl-wrap"><table class="tbl">
+        <tr><th>매체</th><th>타이밍</th><th>앵글</th><th>핵심 제약</th></tr>
+        <tr><td><strong>AI TODAY</strong></td><td>MOU 발표 전</td><td>합성데이터 시장 전망 교육 콘텐츠</td><td>파트너사 실명 ❌, POC 수치 ❌</td></tr>
+        <tr><td><strong>한국경제</strong></td><td>MOU 발표 당일·직후</td><td>기술 리더십 + 글로벌 파트너십</td><td>금융성 표현 자제, 주가 전망 ❌</td></tr>
+      </table></div>
+
+      <h4>준비 사항</h4>
+      <ul>
+        <li>이재철 대표 공식 프로필 사진 (고해상도 최소 2종)</li>
+        <li>사무실·랩 환경 사진 (기술력 느낌, 합성데이터 관련 화면 노출)</li>
+        <li>Q&amp;A 원고 10개 이상 (2-1 기본 원고 기반, 매체별 맞춤 편집)</li>
+      </ul>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+
+    <!-- 5-5 기자간담회 + 팸투어 -->
+    <div class="item-card" id="s5-5">
+      <div class="item-card-header">
+        <div class="item-card-num num-pr">5-5</div>
+        <div class="item-card-title">기자간담회 + 팸투어<br><small style="font-size:12px;font-weight:400;color:#64748b">MOU 발표 당일 기자간담회 · 딜로이트 백서 · 공급망 박람회 취재단</small></div>
+        <div class="item-card-meta">담당: PR팀<br>기한: 기자간담회 MOU 발표 당일 / 팸투어 상해 6/22 또는 WAIC 7월</div>
+      </div>
+
+      <div class="goal-block">목표: MOU 발표의 임팩트를 최대화하는 오프라인 PR 행사 기획 — 기자간담회로 즉각 보도, 팸투어로 글로벌 현장 취재</div>
+
+      <h4>기자간담회 구성</h4>
+      <ul>
+        <li>참석자: 이재철 대표 + 정원영 본부장 + 글로벌 파트너사 임원 (화상 참석 가능)</li>
+        <li>장소: SKAI 본사 또는 주요 언론사 프레스센터</li>
+        <li>순서: 기술 브리핑 → Q&amp;A → 1:1 인터뷰 기회 제공</li>
+        <li>준비물: 보도자료 패키지, 기술 설명 자료, 영상 콘텐츠</li>
+      </ul>
+
+      <h4>팸투어 계획</h4>
+      <div class="tbl-wrap"><table class="tbl">
+        <tr><th>행사</th><th>일정</th><th>취재 앵글</th></tr>
+        <tr><td>중국 국제 공급망 촉진 박람회</td><td>2026.06.22 (상해)</td><td>글로벌 공급망·피지컬 AI 현장 르포</td></tr>
+        <tr><td>WAIC 2026</td><td>2026년 7월 말</td><td>합성데이터 글로벌 트렌드 + SKAI 현장 취재</td></tr>
+      </table></div>
+
+      <h4>딜로이트 백서 연계</h4>
+      <ul>
+        <li>딜로이트와 공동 합성데이터 백서 발행 추진</li>
+        <li>백서 발행 → 언론 기사화 → 투자자 IR 자료로 활용</li>
+        <li>영문 버전 동시 발행 (글로벌 피칭용)</li>
+      </ul>
+      <a class="back-top" href="#top">↑ 맵으로 돌아가기</a>
+    </div>
+  </div><!-- /track-section 5 -->
+
+  <div class="section-divider"></div>
+
+  <!-- ═══ CALENDAR ═══ -->
+  <div class="cal-wrap">
+    <div class="cal-title">Phase 1 전체 액션 캘린더</div>
+    <div class="tbl-wrap"><table class="tbl">
+      <tr><th>날짜</th><th>주요 액션</th></tr>
+      <tr><td><strong>5/20 (수·오늘)</strong></td><td>네이버 광고 계정 개설 / SSL 갱신 요청 / 대표 원고 인터뷰 일정 잡기 / 홈페이지 카테고리 신설 기획 착수 / 벤치마킹 스크리닝 시작</td></tr>
+      <tr><td><strong>5/21 (목)</strong></td><td>AEO/SEO 소스 문서 초안 작성 / 유튜버 DM 문구 준비</td></tr>
+      <tr><td><strong>5/22 (금)</strong></td><td>에이토즈 미팅 10:30 / PR 에이전시·바이럴사 미팅 / 유튜버 DM 발송 / 전자신문 기자 컨택</td></tr>
+      <tr><td><strong>5/23 (토)</strong></td><td>대표 원고 초안 완성 / 벤치마킹 결과 취합 / 한경 인터뷰 일정 확정</td></tr>
+      <tr><td><strong>5/25 (월)</strong></td><td>Phase 1 전체 진척 점검 / Phase 2 준비 돌입</td></tr>
+    </table></div>
+  </div>
+
+
+</div><!-- /detail-wrap -->
+</div><!-- /detail-outer -->
+
+<div class="footer">
+  <span>마케팅솔루션본부 · 정원영 본부장</span>
+  <span>CONFIDENTIAL — 내부 기밀 · 2026.05.19</span>
+</div>
+
+</body>
+</html>
